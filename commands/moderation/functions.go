@@ -1,0 +1,22 @@
+package moderation
+
+func getDurationString(d int64) string {
+	var output string
+
+	switch d {
+	case 60:
+		output = "60 seconds"
+	case 300:
+		output = "5 minutes"
+	case 600:
+		output = "10 minutes"
+	case 3600:
+		output = "1 hour"
+	case 86400:
+		output = "1 day"
+	case 604800:
+		output = "1 week"
+	}
+
+	return output
+}
