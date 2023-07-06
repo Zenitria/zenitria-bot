@@ -1,6 +1,6 @@
 # Zenitria Bot
 
-Discord bot maded for Get XNO discord server.
+Discord bot maded for Get XNO Discord server.
 
 ## Configuring
 
@@ -25,7 +25,7 @@ docker build -t zenitria-bot .
 2. Run builded image
 
 ```
-docker run -d zenitria-bot
+docker run -d --network=host zenitria-bot
 ```
 
 ### Without Docker
