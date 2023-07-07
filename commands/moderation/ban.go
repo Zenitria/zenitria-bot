@@ -2,12 +2,17 @@ package moderation
 
 import (
 	"fmt"
+	"zenitria-bot/commands"
 	"zenitria-bot/usermanager"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 func HandleBan(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	if !commands.GuildChecker(s, i) {
+		return
+	}
+
 	data := i.ApplicationCommandData()
 
 	user := data.Options[0].UserValue(s)

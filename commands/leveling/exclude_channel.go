@@ -2,12 +2,17 @@ package leveling
 
 import (
 	"fmt"
+	"zenitria-bot/commands"
 	"zenitria-bot/usermanager"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 func HandleExcludeChannel(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	if !commands.GuildChecker(s, i) {
+		return
+	}
+
 	data := i.ApplicationCommandData()
 
 	channel := data.Options[0].ChannelValue(s)

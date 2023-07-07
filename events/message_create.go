@@ -16,6 +16,10 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
+	if m.GuildID == "" {
+		return
+	}
+
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	var randomXP int
