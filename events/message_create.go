@@ -6,9 +6,11 @@ import (
 	"time"
 
 	"zenitria-bot/code"
+	"zenitria-bot/database"
 	"zenitria-bot/usermanager"
 
 	"github.com/bwmarrin/discordgo"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
@@ -17,6 +19,14 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.GuildID == "" {
+		return
+	}
+
+	collection := database.DiscordDB.Collection("Excluded Channels")
+
+	err := collection.FindOne(database.CTX, bson.M{"_id": m.ChannelID}).Err()
+
+	if err == nil {
 		return
 	}
 
