@@ -3,17 +3,12 @@ package leveling
 import (
 	"fmt"
 
-	"zenitria-bot/commands"
 	"zenitria-bot/usermanager"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 func HandleRank(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	if !commands.GuildChecker(s, i) {
-		return
-	}
-
 	data := i.ApplicationCommandData()
 
 	var user *discordgo.User

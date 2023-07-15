@@ -2,16 +2,11 @@ package leveling
 
 import (
 	"strconv"
-	"zenitria-bot/commands"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 func HandleLeaderboard(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	if !commands.GuildChecker(s, i) {
-		return
-	}
-
 	page := 1
 
 	embed, components := createLeaderboardEmbedAndComponents(i, page)
