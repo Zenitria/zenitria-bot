@@ -1,23 +1,11 @@
 package leveling
 
 import (
-	"zenitria-bot/commands"
-	"zenitria-bot/usermanager"
-
 	"github.com/bwmarrin/discordgo"
 )
 
 func HandleExcludedChannels(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	if !commands.GuildChecker(s, i) {
-		return
-	}
-
 	channels := getExcludedChannels()
-	permissions := i.Member.Permissions
-
-	if !usermanager.CheckPermissions(permissions, discordgo.PermissionManageChannels, s, i) {
-		return
-	}
 
 	embed := &discordgo.MessageEmbed{
 		Title:       "#️⃣・Excluded channels",

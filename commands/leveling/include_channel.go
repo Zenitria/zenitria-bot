@@ -3,25 +3,13 @@ package leveling
 import (
 	"fmt"
 
-	"zenitria-bot/commands"
-	"zenitria-bot/usermanager"
-
 	"github.com/bwmarrin/discordgo"
 )
 
 func HandleIncludeChannel(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	if !commands.GuildChecker(s, i) {
-		return
-	}
-
 	data := i.ApplicationCommandData()
 
 	channel := data.Options[0].ChannelValue(s)
-	permissions := i.Member.Permissions
-
-	if !usermanager.CheckPermissions(permissions, discordgo.PermissionManageChannels, s, i) {
-		return
-	}
 
 	if checkChannelInDB(channel.ID) {
 		embed := &discordgo.MessageEmbed{
