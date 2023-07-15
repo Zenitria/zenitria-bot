@@ -3,37 +3,9 @@ package usermanager
 import (
 	"zenitria-bot/database"
 
-	"github.com/bwmarrin/discordgo"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
-
-func CheckPermissions(perms int64, perm int64, s *discordgo.Session, i *discordgo.InteractionCreate) bool {
-	if perms&perm == 0 {
-		embed := &discordgo.MessageEmbed{
-			Title:       "🚫・Error!",
-			Description: "You don't have permission to use this command.",
-			Color:       0xf66555,
-			Thumbnail: &discordgo.MessageEmbedThumbnail{
-				URL: "https://media.tenor.com/hI4TN7nt06oAAAAM/error.gif",
-			},
-		}
-
-		response := &discordgo.InteractionResponse{
-			Type: discordgo.InteractionResponseChannelMessageWithSource,
-			Data: &discordgo.InteractionResponseData{
-				Embeds: []*discordgo.MessageEmbed{embed},
-				Flags:  discordgo.MessageFlagsEphemeral,
-			},
-		}
-
-		s.InteractionRespond(i.Interaction, response)
-
-		return false
-	}
-
-	return true
-}
 
 func CreateUser(id string) {
 	collection := database.DiscordDB.Collection("Users")
