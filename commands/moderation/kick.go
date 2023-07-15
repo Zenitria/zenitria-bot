@@ -2,25 +2,14 @@ package moderation
 
 import (
 	"fmt"
-	"zenitria-bot/commands"
-	"zenitria-bot/usermanager"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 func HandleKick(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	if !commands.GuildChecker(s, i) {
-		return
-	}
-
 	data := i.ApplicationCommandData()
 
 	user := data.Options[0].UserValue(s)
-	permissions := i.Member.Permissions
-
-	if !usermanager.CheckPermissions(permissions, discordgo.PermissionKickMembers, s, i) {
-		return
-	}
 
 	var reason string
 

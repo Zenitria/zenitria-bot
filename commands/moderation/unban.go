@@ -2,7 +2,6 @@ package moderation
 
 import (
 	"fmt"
-	"zenitria-bot/usermanager"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -11,11 +10,6 @@ func HandleUnban(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	data := i.ApplicationCommandData()
 
 	id := data.Options[0].StringValue()
-	permissions := i.Member.Permissions
-
-	if !usermanager.CheckPermissions(permissions, discordgo.PermissionBanMembers, s, i) {
-		return
-	}
 
 	s.GuildBanDelete(i.GuildID, id)
 
