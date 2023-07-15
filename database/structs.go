@@ -6,7 +6,7 @@ type User struct {
 	XP          int     `bson:"xp"`
 	NextLevelXP int     `bson:"nextLevelXP"`
 	Warnings    int     `bson:"warnings"`
-	Diamonds    float32 `bson:"diamonds"`
+	Gold        float32 `bson:"Gold"`
 }
 
 type Code struct {
