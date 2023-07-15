@@ -2,16 +2,11 @@ package general
 
 import (
 	"fmt"
-	"zenitria-bot/commands"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 func HandleServerInfo(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	if !commands.GuildChecker(s, i) {
-		return
-	}
-
 	server, _ := s.State.Guild(i.GuildID)
 
 	created := server.JoinedAt.Unix()

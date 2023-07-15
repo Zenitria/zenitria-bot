@@ -2,16 +2,11 @@ package general
 
 import (
 	"fmt"
-	"zenitria-bot/commands"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 func HandleUserInfo(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	if !commands.GuildChecker(s, i) {
-		return
-	}
-
 	data := i.ApplicationCommandData()
 
 	var user *discordgo.User
