@@ -60,11 +60,11 @@ func HandleUserInfo(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		},
 		Fields: []*discordgo.MessageEmbedField{
 			{
-				Name:  "Account",
+				Name:  "👤・Account",
 				Value: fmt.Sprintf("👤・**Username**: %s\n🆔・**ID**: %s\n🤖・**Bot**: %s\n📆・**Creation Date**: <t:%d>\n\u200b", user.Username, user.ID, bot, created),
 			},
 			{
-				Name:  "Server",
+				Name:  "🏰・Server",
 				Value: fmt.Sprintf("🏷️・**Nick**: %s\n🚀・**Booster**: %s\n📆・**Join Date**: <t:%d>\n🎓・**Top Role**: <@&%s>", nick, booster, joined, role),
 			},
 		},
