@@ -44,7 +44,7 @@ func NewUser(id string) *User {
 		XP:          0,
 		NextLevelXP: 100,
 		Warnings:    0,
-		Money:       0,
+		Cash:        0,
 	}
 }
 
