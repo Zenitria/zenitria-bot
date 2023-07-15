@@ -34,7 +34,7 @@ func CheckUser(id string) bool {
 	return err != mongo.ErrNoDocuments
 }
 
-func UpdateUser(id string, l int, xp int, n int, w int, c int) {
+func UpdateUser(id string, l int, xp int, n int, w int, c float32) {
 	collection := database.DiscordDB.Collection("Users")
 
 	update := bson.M{

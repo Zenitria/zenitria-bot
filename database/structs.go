@@ -1,12 +1,12 @@
 package database
 
 type User struct {
-	ID          string `bson:"_id"`
-	Level       int    `bson:"level"`
-	XP          int    `bson:"xp"`
-	NextLevelXP int    `bson:"nextLevelXP"`
-	Warnings    int    `bson:"warnings"`
-	Cash        int    `bson:"Cash"`
+	ID          string  `bson:"_id"`
+	Level       int     `bson:"level"`
+	XP          int     `bson:"xp"`
+	NextLevelXP int     `bson:"nextLevelXP"`
+	Warnings    int     `bson:"warnings"`
+	Cash        float32 `bson:"Cash"`
 }
 
 type Code struct {
