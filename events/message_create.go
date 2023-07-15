@@ -5,7 +5,6 @@ import (
 	"math/rand"
 	"time"
 
-	"zenitria-bot/code"
 	"zenitria-bot/database"
 	"zenitria-bot/usermanager"
 
@@ -32,14 +31,14 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
 
-	var randomXP int
+	var randNum int
 
 	if len(m.Content) <= 120 {
-		randomXP = rng.Intn(2) + 1
+		randNum = rng.Intn(2) + 1
 	} else if len(m.Content) <= 300 {
-		randomXP = rng.Intn(3) + 2
+		randNum = rng.Intn(3) + 2
 	} else {
-		randomXP = rng.Intn(3) + 4
+		randNum = rng.Intn(3) + 4
 	}
 
 	if !usermanager.CheckUser(m.Author.ID) {
@@ -49,9 +48,10 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	user := usermanager.GetUser(m.Author.ID)
 
 	level := user.Level
-	xp := user.XP + randomXP
+	xp := user.XP + randNum
 	nextLevelXP := user.NextLevelXP
 	levelUP := false
+	cash := user.Cash + (float32(randNum) / 100)
 
 	if xp >= nextLevelXP {
 		xp -= nextLevelXP
@@ -60,7 +60,7 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		levelUP = true
 	}
 
-	usermanager.UpdateUser(m.Author.ID, level, xp, nextLevelXP, user.Warnings)
+	usermanager.UpdateUser(m.Author.ID, level, xp, nextLevelXP, user.Warnings, cash)
 
 	if !levelUP {
 		return
@@ -76,24 +76,4 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	s.ChannelMessageSendEmbedReply(m.ChannelID, embed, m.Reference())
-
-	code := code.GenerateCode(level*10, 24, 1)
-
-	embed = &discordgo.MessageEmbed{
-		Title:       "✨・Level UP",
-		Description: "Congratulations on your new level!",
-		Color:       0x06e386,
-		Thumbnail: &discordgo.MessageEmbedThumbnail{
-			URL: "https://media.tenor.com/Duc7gUlXkdYAAAAC/level-up.gif",
-		},
-		Fields: []*discordgo.MessageEmbedField{
-			{
-				Name:  "Reward",
-				Value: fmt.Sprintf("🎁・**Code**: %s\n💎・**Diamonds**: %d\n⏳・**Expires**: <t:%d:R>\n💰・**Redeem**: http://get-xno.com/app/redeem", code, level*10, time.Now().Add(24*time.Hour).Unix()),
-			},
-		},
-	}
-
-	channel, _ := s.UserChannelCreate(m.Author.ID)
-	s.ChannelMessageSendEmbed(channel.ID, embed)
 }
