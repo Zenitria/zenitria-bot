@@ -2,6 +2,7 @@ package events
 
 import (
 	"strings"
+	"zenitria-bot/commands/economy"
 	"zenitria-bot/commands/general"
 	"zenitria-bot/commands/leveling"
 	"zenitria-bot/commands/moderation"
@@ -26,11 +27,16 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			"excluded-channels": leveling.HandleExcludedChannels,
 			"exclude-channel":   leveling.HandleExcludeChannel,
 			"include-channel":   leveling.HandleIncludeChannel,
+			// Rewards
+			"balance": economy.HandleBalance,
+			"shop":    economy.HandleShop,
+			"buy":     economy.HandleBuy,
 			// Moderation
 			"ban":     moderation.HandleBan,
 			"unban":   moderation.HandleUnban,
 			"kick":    moderation.HandleKick,
 			"timeout": moderation.HandleTimeout,
+			"warn":    moderation.HandleWarn,
 		}
 
 		if handler, ok := handlers[data.Name]; ok {

@@ -35,6 +35,13 @@ func HandleHelp(s *discordgo.Session, i *discordgo.InteractionCreate) {
 				},
 			},
 			{
+				Label: "Economy",
+				Value: "economy",
+				Emoji: discordgo.ComponentEmoji{
+					Name: "💵",
+				},
+			},
+			{
 				Label: "Moderation",
 				Value: "moderation",
 				Emoji: discordgo.ComponentEmoji{
@@ -82,6 +89,13 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 				Value: "leveling",
 				Emoji: discordgo.ComponentEmoji{
 					Name: "✨",
+				},
+			},
+			{
+				Label: "Economy",
+				Value: "economy",
+				Emoji: discordgo.ComponentEmoji{
+					Name: "💵",
 				},
 			},
 			{
@@ -181,6 +195,40 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 		}
 
 		s.InteractionRespond(i.Interaction, response)
+	case "economy":
+		mentions := getSlashCommandMentions(s)
+
+		embed := &discordgo.MessageEmbed{
+			Title: "💵・Economy",
+			Color: 0x06e386,
+			Thumbnail: &discordgo.MessageEmbedThumbnail{
+				URL: "https://gifdb.com/images/high/need-help-baby-in-lamp-22l1cd6hndd62nkl.gif",
+			},
+			Fields: []*discordgo.MessageEmbedField{
+				{
+					Name:  mentions["balance"] + " (user)",
+					Value: "Shows your balance or the balance of another user.",
+				},
+				{
+					Name:  mentions["shop"],
+					Value: "Shows the shop.",
+				},
+				{
+					Name:  mentions["buy"] + " [item]",
+					Value: "Buys an item from the shop.",
+				},
+			},
+		}
+
+		response := &discordgo.InteractionResponse{
+			Type: discordgo.InteractionResponseUpdateMessage,
+			Data: &discordgo.InteractionResponseData{
+				Embeds:     []*discordgo.MessageEmbed{embed},
+				Components: components,
+			},
+		}
+
+		s.InteractionRespond(i.Interaction, response)
 	case "moderation":
 		mentions := getSlashCommandMentions(s)
 
@@ -206,6 +254,10 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 				{
 					Name:  mentions["timeout"] + " [user] [duration] (reason)",
 					Value: "Timeout a user.",
+				},
+				{
+					Name:  mentions["warn"] + " [user] (reason)",
+					Value: "Warns a user.",
 				},
 			},
 		}
