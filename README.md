@@ -10,7 +10,7 @@ Discord bot maded for Get XNO Discord server.
 cp .env.example .env
 ```
 
-2. Set `TOKEN` and `MONGODB` in `.env` file
+2. Set variables in `.env` file
 
 ## Build and run
 
