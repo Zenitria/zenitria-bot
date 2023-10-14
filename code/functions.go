@@ -22,9 +22,9 @@ func createCode() string {
 	return string(code)
 }
 
-func createExpires(hrs int) string {
+func createExpires(hrs int) time.Time {
 	now := time.Now().UTC()
-	expires := now.Add(time.Hour * time.Duration(hrs)).Format("2006-01-02T15:04:05Z")
+	expires := now.Add(time.Hour * time.Duration(hrs))
 
 	return expires
 }
@@ -37,7 +37,7 @@ func checkCode(code string) bool {
 	return err == mongo.ErrNoDocuments
 }
 
-func addCode(code string, amt int, exp string, uses int) {
+func addCode(code string, amt int, exp time.Time, uses int) {
 	collection := database.GetXNODB.Collection("Codes")
 
 	newCode := database.NewCode(code, amt, exp, uses)

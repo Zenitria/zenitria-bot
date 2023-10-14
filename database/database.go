@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -48,14 +49,14 @@ func NewUser(id string) *User {
 	}
 }
 
-func NewCode(code string, amt int, exp string, uses int) *Code {
+func NewCode(code string, amt int, exp time.Time, uses int) *Code {
 	return &Code{
-		Code:    code,
-		Amount:  amt,
-		Expires: exp,
-		Uses:    uses,
-		Used:    0,
-		Users:   []string{},
-		IPs:     []string{},
+		Code:      code,
+		Amount:    amt,
+		ExpiresAt: exp,
+		Uses:      uses,
+		Used:      0,
+		Users:     []string{},
+		IPs:       []string{},
 	}
 }
