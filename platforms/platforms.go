@@ -2,14 +2,20 @@ package platforms
 
 import (
 	"fmt"
+	"math"
 	"net/http"
+	"zenitria-bot/config"
 )
 
 func GetXNO() (Platform, string) {
-	url := "https://api.get-xno.com/global/stats"
+	url := config.GET_XNO_API_URL + "/public/stats"
 
 	req, _ := http.NewRequest("GET", url, nil)
-	res, _ := http.DefaultClient.Do(req)
+	res, err := http.DefaultClient.Do(req)
+
+	if err != nil {
+		return Platform{}, ""
+	}
 
 	if res.Body != nil {
 		defer res.Body.Close()
@@ -24,6 +30,12 @@ func GetXNO() (Platform, string) {
 		percentage = fmt.Sprintf("+%.2f", change)
 	} else {
 		percentage = fmt.Sprintf("%.2f", change)
+	}
+
+	if math.IsInf(change, 1) {
+		percentage = "+∞"
+	} else if math.IsInf(change, -1) {
+		percentage = "-∞"
 	}
 
 	percentage += "%"
