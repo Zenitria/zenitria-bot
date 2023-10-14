@@ -7,30 +7,20 @@ import (
 	"syscall"
 	"zenitria-bot/coingecko"
 	"zenitria-bot/commands"
+	"zenitria-bot/config"
 	"zenitria-bot/database"
 	"zenitria-bot/events"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/joho/godotenv"
-)
-
-var (
-	TOKEN   string
-	MONGODB string
 )
 
 func main() {
-	godotenv.Load()
-
-	TOKEN = os.Getenv("TOKEN")
-	MONGODB = os.Getenv("MONGODB")
-
-	database.DiscordDB = database.Connect(MONGODB, "Discord")
-	database.GetXNODB = database.Connect(MONGODB, "Get-XNO")
+	database.DiscordDB = database.Connect(config.MONGODB_URI, "Discord")
+	database.GetXNODB = database.Connect(config.MONGODB_URI, "Get-XNO")
 
 	coingecko.Init()
 
-	s, err := discordgo.New("Bot " + TOKEN)
+	s, err := discordgo.New("Bot " + config.TOKEN)
 
 	if err != nil {
 		fmt.Print(err.Error())
