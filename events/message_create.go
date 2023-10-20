@@ -10,6 +10,7 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
@@ -21,12 +22,19 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	collection := database.DiscordDB.Collection("Excluded Channels")
+	collection := database.DiscordDB.Collection("Settings")
 
-	err := collection.FindOne(database.CTX, bson.M{"_id": m.ChannelID}).Err()
+	var setting database.Setting
+	err := collection.FindOne(database.CTX, bson.M{"_id": "Excluded Channels"}).Decode(&setting)
 
-	if err == nil {
+	if err != nil {
 		return
+	}
+
+	for _, ch := range setting.Value.(primitive.A) {
+		if ch == m.ChannelID {
+			return
+		}
 	}
 
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
