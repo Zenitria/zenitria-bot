@@ -119,6 +119,32 @@ func HandleSendVerificationMessage(s *discordgo.Session, i *discordgo.Interactio
 }
 
 func HandleVerifyButton(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	role, _ := manager.GetVerificationRole()
+
+	for _, r := range i.Member.Roles {
+		if r == role {
+			embed := &discordgo.MessageEmbed{
+				Title:       "🚫・Error!",
+				Description: "You are already verified!",
+				Color:       0xf66555,
+				Thumbnail: &discordgo.MessageEmbedThumbnail{
+					URL: "https://media.tenor.com/hI4TN7nt06oAAAAM/error.gif",
+				},
+			}
+
+			response := &discordgo.InteractionResponse{
+				Type: discordgo.InteractionResponseChannelMessageWithSource,
+				Data: &discordgo.InteractionResponseData{
+					Embeds: []*discordgo.MessageEmbed{embed},
+					Flags:  discordgo.MessageFlagsEphemeral,
+				},
+			}
+
+			s.InteractionRespond(i.Interaction, response)
+			return
+		}
+	}
+
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	var first, second int
