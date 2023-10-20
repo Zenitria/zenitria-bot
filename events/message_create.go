@@ -68,7 +68,7 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		levelUP = true
 	}
 
-	manager.UpdateUser(m.Author.ID, level, xp, nextLevelXP, user.Warnings, cash)
+	manager.UpdateUser(m.Author.ID, level, xp, nextLevelXP, user.Warnings, cash, user.LastClaimed)
 
 	if !levelUP {
 		return
