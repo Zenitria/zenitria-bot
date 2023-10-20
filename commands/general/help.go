@@ -219,6 +219,10 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 					Name:  mentions["buy"] + " [item]",
 					Value: "Buys an item from the shop.",
 				},
+				{
+					Name:  mentions["claim"],
+					Value: "Claims your hourly reward.",
+				},
 			},
 		}
 
