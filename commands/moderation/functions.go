@@ -34,5 +34,5 @@ func addWarn(id string) {
 
 	user.Warnings++
 
-	manager.UpdateUser(id, user.Level, user.XP, user.NextLevelXP, user.Warnings, user.Cash)
+	manager.UpdateUser(id, user.Level, user.XP, user.NextLevelXP, user.Warnings, user.Cash, user.LastClaimed)
 }
