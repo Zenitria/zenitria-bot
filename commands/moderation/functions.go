@@ -1,6 +1,6 @@
 package moderation
 
-import "zenitria-bot/usermanager"
+import "zenitria-bot/manager"
 
 func getDurationString(d int64) string {
 	var output string
@@ -24,15 +24,15 @@ func getDurationString(d int64) string {
 }
 
 func getWarns(id string) int {
-	user := usermanager.GetUser(id)
+	user := manager.GetUser(id)
 
 	return user.Warnings
 }
 
 func addWarn(id string) {
-	user := usermanager.GetUser(id)
+	user := manager.GetUser(id)
 
 	user.Warnings++
 
-	usermanager.UpdateUser(id, user.Level, user.XP, user.NextLevelXP, user.Warnings, user.Cash)
+	manager.UpdateUser(id, user.Level, user.XP, user.NextLevelXP, user.Warnings, user.Cash)
 }
