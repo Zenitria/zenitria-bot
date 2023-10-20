@@ -10,10 +10,10 @@ func checkBalance(id string, price float32) bool {
 	return user.Cash >= price
 }
 
-func updateBalance(id string, price float32) {
+func updateBalance(id string, am float32) {
 	user := manager.GetUser(id)
 
-	user.Cash += price
+	user.Cash += am
 
-	manager.UpdateUser(id, user.Level, user.XP, user.NextLevelXP, user.Warnings, user.Cash)
+	manager.UpdateUser(id, user.Level, user.XP, user.NextLevelXP, user.Warnings, user.Cash, user.LastClaimed)
 }
