@@ -3,12 +3,13 @@ package database
 import "time"
 
 type User struct {
-	ID          string  `bson:"_id"`
-	Level       int     `bson:"level"`
-	XP          int     `bson:"xp"`
-	NextLevelXP int     `bson:"nextLevelXP"`
-	Warnings    int     `bson:"warnings"`
-	Cash        float32 `bson:"cash"`
+	ID          string    `bson:"_id"`
+	Level       int       `bson:"level"`
+	XP          int       `bson:"xp"`
+	NextLevelXP int       `bson:"nextLevelXP"`
+	Warnings    int       `bson:"warnings"`
+	Cash        float32   `bson:"cash"`
+	LastClaimed time.Time `bson:"lastClaimed"`
 }
 
 type Code struct {
