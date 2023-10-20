@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"zenitria-bot/database"
-	"zenitria-bot/usermanager"
+	"zenitria-bot/manager"
 
 	"github.com/bwmarrin/discordgo"
 	"go.mongodb.org/mongo-driver/bson"
@@ -41,11 +41,11 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		randNum = rng.Intn(3) + 4
 	}
 
-	if !usermanager.CheckUser(m.Author.ID) {
-		usermanager.CreateUser(m.Author.ID)
+	if !manager.CheckUser(m.Author.ID) {
+		manager.CreateUser(m.Author.ID)
 	}
 
-	user := usermanager.GetUser(m.Author.ID)
+	user := manager.GetUser(m.Author.ID)
 
 	level := user.Level
 	xp := user.XP + randNum
@@ -60,7 +60,7 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		levelUP = true
 	}
 
-	usermanager.UpdateUser(m.Author.ID, level, xp, nextLevelXP, user.Warnings, cash)
+	manager.UpdateUser(m.Author.ID, level, xp, nextLevelXP, user.Warnings, cash)
 
 	if !levelUP {
 		return
