@@ -38,7 +38,7 @@ func CheckUser(id string) bool {
 	return err != mongo.ErrNoDocuments
 }
 
-func UpdateUser(id string, l int, xp int, n int, w int, c float32) {
+func UpdateUser(id string, l int, xp int, n int, w int, c float32, lc time.Time) {
 	collection := database.DiscordDB.Collection("Users")
 
 	update := bson.M{
@@ -49,6 +49,7 @@ func UpdateUser(id string, l int, xp int, n int, w int, c float32) {
 			NextLevelXP: n,
 			Warnings:    w,
 			Cash:        c,
+			LastClaimed: lc,
 		},
 	}
 
@@ -123,11 +124,11 @@ func HandleVerification(s *discordgo.Session, i *discordgo.InteractionCreate, da
 	s.GuildMemberRoleAdd(i.GuildID, i.Member.User.ID, role)
 
 	embed := &discordgo.MessageEmbed{
-		Title:       "✅・Success!",
+		Title:       "🔓・Verify",
 		Description: "You have been verified!",
 		Color:       0x06e386,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
-			URL: "https://media.tenor.com/ikvoQAqXu9MAAAAM/success.gif",
+			URL: "https://media.tenor.com/TgKK6YKNkm0AAAAd/verified-verificado.gif",
 		},
 	}
 
