@@ -24,3 +24,8 @@ type Code struct {
 type Channel struct {
 	ID string `bson:"_id"`
 }
+
+type Setting struct {
+	Name  string `bson:"_id"`
+	Value any    `bson:"value"`
+}
