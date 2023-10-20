@@ -58,41 +58,7 @@ func RegisterCommands(s *discordgo.Session) {
 			Description:  "Get the server's leaderboard",
 			DMPermission: pointer(false),
 		},
-		{
-			Name:                     "excluded-channels",
-			Description:              "List all excluded channels",
-			DMPermission:             pointer(false),
-			DefaultMemberPermissions: pointer[int64](discordgo.PermissionManageChannels),
-		},
-		{
-			Name:                     "exclude-channel",
-			Description:              "Exclude a channel from the leveling system",
-			DMPermission:             pointer(false),
-			DefaultMemberPermissions: pointer[int64](discordgo.PermissionManageChannels),
-			Options: []*discordgo.ApplicationCommandOption{
-				{
-					Type:        discordgo.ApplicationCommandOptionChannel,
-					Name:        "channel",
-					Description: "The channel to exclude",
-					Required:    true,
-				},
-			},
-		},
-		{
-			Name:                     "include-channel",
-			Description:              "Include a channel in the leveling system",
-			DMPermission:             pointer(false),
-			DefaultMemberPermissions: pointer[int64](discordgo.PermissionManageChannels),
-			Options: []*discordgo.ApplicationCommandOption{
-				{
-					Type:        discordgo.ApplicationCommandOptionChannel,
-					Name:        "channel",
-					Description: "The channel to include",
-					Required:    true,
-				},
-			},
-		},
-		// Rewards
+		// Economy
 		{
 			Name:         "balance",
 			Description:  "Get your balance or the balance of another user",
@@ -145,6 +111,11 @@ func RegisterCommands(s *discordgo.Session) {
 					},
 				},
 			},
+		},
+		{
+			Name:         "claim",
+			Description:  "Claim your hourly reward",
+			DMPermission: pointer(false),
 		},
 		// Moderation
 		{
@@ -269,6 +240,70 @@ func RegisterCommands(s *discordgo.Session) {
 					Name:        "reason",
 					Description: "The reason for the warn",
 					Required:    false,
+				},
+			},
+		},
+		// Settings
+		{
+			Name:                     "set-verification-role",
+			Description:              "Set the verification role",
+			DMPermission:             pointer(false),
+			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
+
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionRole,
+					Name:        "role",
+					Description: "The role to set as the verification role",
+					Required:    true,
+				},
+			},
+		},
+		{
+			Name:                     "send-verification-message",
+			Description:              "Send the verification message to selected channel",
+			DMPermission:             pointer(false),
+			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionChannel,
+					Name:        "channel",
+					Description: "The channel to send the verification message to",
+					Required:    true,
+				},
+			},
+		},
+		{
+			Name:                     "excluded-channels",
+			Description:              "List all excluded channels from the leveling system",
+			DMPermission:             pointer(false),
+			DefaultMemberPermissions: pointer[int64](discordgo.PermissionManageChannels),
+		},
+		{
+			Name:                     "exclude-channel",
+			Description:              "Exclude a channel from the leveling system",
+			DMPermission:             pointer(false),
+			DefaultMemberPermissions: pointer[int64](discordgo.PermissionManageChannels),
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionChannel,
+					Name:        "channel",
+					Description: "The channel to exclude",
+					Required:    true,
+				},
+			},
+		},
+		{
+			Name:                     "include-channel",
+			Description:              "Include a channel in the leveling system",
+			DMPermission:             pointer(false),
+			DefaultMemberPermissions: pointer[int64](discordgo.PermissionManageChannels),
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionChannel,
+					Name:        "channel",
+					Description: "The channel to include",
+					Required:    true,
 				},
 			},
 		},

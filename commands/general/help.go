@@ -48,6 +48,13 @@ func HandleHelp(s *discordgo.Session, i *discordgo.InteractionCreate) {
 					Name: "🛡️",
 				},
 			},
+			{
+				Label: "Settings",
+				Value: "settings",
+				Emoji: discordgo.ComponentEmoji{
+					Name: "⚙️",
+				},
+			},
 		},
 	}
 
@@ -103,6 +110,13 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 				Value: "moderation",
 				Emoji: discordgo.ComponentEmoji{
 					Name: "🛡️",
+				},
+			},
+			{
+				Label: "Settings",
+				Value: "settings",
+				Emoji: discordgo.ComponentEmoji{
+					Name: "⚙️",
 				},
 			},
 		},
@@ -170,18 +184,6 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 				{
 					Name:  mentions["leaderboard"],
 					Value: "Shows the server's leaderboard.",
-				},
-				{
-					Name:  mentions["excluded-channels"],
-					Value: "Lists all excluded channels.",
-				},
-				{
-					Name:  mentions["exclude-channel"] + " [channel]",
-					Value: "Excludes a channel from the leveling system.",
-				},
-				{
-					Name:  mentions["include-channel"] + " [channel]",
-					Value: "Includes a channel in the leveling system.",
 				},
 			},
 		}
@@ -258,6 +260,48 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 				{
 					Name:  mentions["warn"] + " [user] (reason)",
 					Value: "Warns a user.",
+				},
+			},
+		}
+
+		response := &discordgo.InteractionResponse{
+			Type: discordgo.InteractionResponseUpdateMessage,
+			Data: &discordgo.InteractionResponseData{
+				Embeds:     []*discordgo.MessageEmbed{embed},
+				Components: components,
+			},
+		}
+
+		s.InteractionRespond(i.Interaction, response)
+	case "settings":
+		mentions := getSlashCommandMentions(s)
+
+		embed := &discordgo.MessageEmbed{
+			Title: "⚙️・Settings",
+			Color: 0x06e386,
+			Thumbnail: &discordgo.MessageEmbedThumbnail{
+				URL: "https://gifdb.com/images/high/need-help-baby-in-lamp-22l1cd6hndd62nkl.gif",
+			},
+			Fields: []*discordgo.MessageEmbedField{
+				{
+					Name:  mentions["set-verification-role"] + " [role]",
+					Value: "Sets the verification role.",
+				},
+				{
+					Name:  mentions["send-verification-message"] + " [channel]",
+					Value: "Sends the verification message to selected channel",
+				},
+				{
+					Name:  mentions["excluded-channels"],
+					Value: "Lists all excluded channels from the leveling system.",
+				},
+				{
+					Name:  mentions["exclude-channel"] + " [channel]",
+					Value: "Excludes a channel from the leveling system.",
+				},
+				{
+					Name:  mentions["include-channel"] + " [channel]",
+					Value: "Includes a channel in the leveling system.",
 				},
 			},
 		}
