@@ -7,7 +7,6 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
@@ -139,55 +138,4 @@ func createLeaderboardEmbedAndComponents(i *discordgo.InteractionCreate, p int) 
 	}
 
 	return embed, components
-}
-
-func getExcludedChannels() string {
-	collection := database.DiscordDB.Collection("Excluded Channels")
-
-	var channels []database.Channel
-
-	cursor, _ := collection.Find(database.CTX, bson.M{})
-
-	for cursor.Next(database.CTX) {
-		var channel database.Channel
-		cursor.Decode(&channel)
-
-		channels = append(channels, channel)
-	}
-
-	var output string
-
-	for i, ch := range channels {
-		output += fmt.Sprintf("%d. <#%s>\n", i+1, ch.ID)
-	}
-
-	if output == "" {
-		output = "No channels are excluded from leveling system."
-	}
-
-	return output
-}
-
-func checkChannelInDB(ch string) bool {
-	collection := database.DiscordDB.Collection("Excluded Channels")
-
-	err := collection.FindOne(database.CTX, bson.M{"_id": ch}).Err()
-
-	return err == mongo.ErrNoDocuments
-}
-
-func addChannelToDB(ch string) {
-	collection := database.DiscordDB.Collection("Excluded Channels")
-
-	newChannel := database.Channel{
-		ID: ch,
-	}
-
-	collection.InsertOne(database.CTX, newChannel)
-}
-
-func removeChannelFromDB(ch string) {
-	collection := database.DiscordDB.Collection("Excluded Channels")
-
-	collection.DeleteOne(database.CTX, bson.M{"_id": ch})
 }
