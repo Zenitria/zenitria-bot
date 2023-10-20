@@ -3,7 +3,7 @@ package leveling
 import (
 	"fmt"
 
-	"zenitria-bot/usermanager"
+	"zenitria-bot/manager"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -19,7 +19,7 @@ func HandleRank(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		user = data.Options[0].UserValue(s)
 	}
 
-	userInfo := usermanager.GetUser(user.ID)
+	userInfo := manager.GetUser(user.ID)
 	rank, lastRank := getRank(user.ID)
 
 	embed := &discordgo.MessageEmbed{
