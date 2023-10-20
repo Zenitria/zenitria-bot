@@ -6,6 +6,8 @@ import (
 	"zenitria-bot/commands/general"
 	"zenitria-bot/commands/leveling"
 	"zenitria-bot/commands/moderation"
+	"zenitria-bot/commands/settings"
+	"zenitria-bot/manager"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -22,21 +24,25 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			"get-xno":     general.HandleGetXNO,
 			"help":        general.HandleHelp,
 			// Leveling
-			"rank":              leveling.HandleRank,
-			"leaderboard":       leveling.HandleLeaderboard,
-			"excluded-channels": leveling.HandleExcludedChannels,
-			"exclude-channel":   leveling.HandleExcludeChannel,
-			"include-channel":   leveling.HandleIncludeChannel,
-			// Rewards
+			"rank":        leveling.HandleRank,
+			"leaderboard": leveling.HandleLeaderboard,
+			// Economy
 			"balance": economy.HandleBalance,
 			"shop":    economy.HandleShop,
 			"buy":     economy.HandleBuy,
+			"claim":   economy.HandleClaim,
 			// Moderation
 			"ban":     moderation.HandleBan,
 			"unban":   moderation.HandleUnban,
 			"kick":    moderation.HandleKick,
 			"timeout": moderation.HandleTimeout,
 			"warn":    moderation.HandleWarn,
+			// Settings
+			"set-verification-role":     settings.HandleSetVerificationRole,
+			"send-verification-message": settings.HandleSendVerificationMessage,
+			"excluded-channels":         settings.HandleExcludedChannels,
+			"exclude-channel":           settings.HandleExcludeChannel,
+			"include-channel":           settings.HandleIncludeChannel,
 		}
 
 		if handler, ok := handlers[data.Name]; ok {
@@ -45,21 +51,45 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	case discordgo.InteractionMessageComponent:
 		data := i.MessageComponentData()
 
-		handlers := map[string](func(*discordgo.Session, *discordgo.InteractionCreate, string, string)){
-			"help-menu":                   general.HandleHelpMenu,
+		handlersWithData := map[string](func(*discordgo.Session, *discordgo.InteractionCreate, string, string)){
+			// Help
+			"help-menu": general.HandleHelpMenu,
+			// Leaderboard
 			"leaderboard-previous-button": leveling.HandleLeaderboardButtons,
 			"leaderboard-next-button":     leveling.HandleLeaderboardButtons,
 		}
 
+		handlersWithoutData := map[string](func(*discordgo.Session, *discordgo.InteractionCreate)){
+			// Verification
+			"verify-button": settings.HandleVerifyButton,
+		}
+
 		splitted := strings.Split(data.CustomID, "|")
 
-		if handler, ok := handlers[splitted[0]]; ok {
+		if handler, ok := handlersWithData[splitted[0]]; ok {
 			if len(data.Values) == 0 {
 				handler(s, i, splitted[1], string(splitted[2]))
 				return
 			}
 
 			handler(s, i, splitted[1], data.Values[0])
+			return
+		}
+
+		if handler, ok := handlersWithoutData[data.CustomID]; ok {
+			handler(s, i)
+			return
+		}
+	case discordgo.InteractionModalSubmit:
+		data := i.ModalSubmitData()
+
+		handlers := map[string](func(*discordgo.Session, *discordgo.InteractionCreate, *discordgo.ModalSubmitInteractionData)){
+			// Verification
+			"verification-modal": manager.HandleVerification,
+		}
+
+		if handler, ok := handlers[data.CustomID]; ok {
+			handler(s, i, &data)
 		}
 	}
 }
