@@ -244,70 +244,81 @@ func RegisterCommands(s *discordgo.Session) {
 			},
 		},
 		// Settings
+		// Settings/Verification
 		{
-			Name:                     "set-verification-role",
-			Description:              "Set the verification role",
+			Name:                     "verification",
+			Description:              "Manage the verification system",
 			DMPermission:             pointer(false),
 			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
-
 			Options: []*discordgo.ApplicationCommandOption{
 				{
-					Type:        discordgo.ApplicationCommandOptionRole,
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
 					Name:        "role",
-					Description: "The role to set as the verification role",
-					Required:    true,
+					Description: "Set the verification role",
+					Options: []*discordgo.ApplicationCommandOption{
+						{
+							Type:        discordgo.ApplicationCommandOptionRole,
+							Name:        "role",
+							Description: "The role to set as the verification role",
+							Required:    true,
+						},
+					},
 				},
-			},
-		},
-		{
-			Name:                     "send-verification-message",
-			Description:              "Send the verification message to selected channel",
-			DMPermission:             pointer(false),
-			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
-			Options: []*discordgo.ApplicationCommandOption{
 				{
-					Type:        discordgo.ApplicationCommandOptionChannel,
-					Name:        "channel",
-					Description: "The channel to send the verification message to",
-					Required:    true,
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+					Name:        "send",
+					Description: "Send the verification message to selected channel",
+					Options: []*discordgo.ApplicationCommandOption{
+						{
+							Type:        discordgo.ApplicationCommandOptionChannel,
+							Name:        "channel",
+							Description: "The channel to send the verification message to",
+							Required:    true,
+						},
+					},
 				},
 			},
 		},
+		// Settings/Leveling
 		{
-			Name:                     "excluded-channels",
-			Description:              "List all excluded channels from the leveling system",
-			DMPermission:             pointer(false),
-			DefaultMemberPermissions: pointer[int64](discordgo.PermissionManageChannels),
-		},
-		{
-			Name:                     "exclude-channel",
-			Description:              "Exclude a channel from the leveling system",
-			DMPermission:             pointer(false),
-			DefaultMemberPermissions: pointer[int64](discordgo.PermissionManageChannels),
-			Options: []*discordgo.ApplicationCommandOption{
-				{
-					Type:        discordgo.ApplicationCommandOptionChannel,
-					Name:        "channel",
-					Description: "The channel to exclude",
-					Required:    true,
-				},
-			},
-		},
-		{
-			Name:                     "include-channel",
-			Description:              "Include a channel in the leveling system",
+			Name:                     "leveling",
+			Description:              "Manage the leveling system",
 			DMPermission:             pointer(false),
 			DefaultMemberPermissions: pointer[int64](discordgo.PermissionManageChannels),
 			Options: []*discordgo.ApplicationCommandOption{
 				{
-					Type:        discordgo.ApplicationCommandOptionChannel,
-					Name:        "channel",
-					Description: "The channel to include",
-					Required:    true,
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+					Name:        "exclude",
+					Description: "Exclude a channel from the leveling system",
+					Options: []*discordgo.ApplicationCommandOption{
+						{
+							Type:        discordgo.ApplicationCommandOptionChannel,
+							Name:        "channel",
+							Description: "The channel to exclude",
+							Required:    true,
+						},
+					},
+				},
+				{
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+					Name:        "include",
+					Description: "Include a channel in the leveling system",
+					Options: []*discordgo.ApplicationCommandOption{
+						{
+							Type:        discordgo.ApplicationCommandOptionChannel,
+							Name:        "channel",
+							Description: "The channel to include",
+							Required:    true,
+						},
+					},
+				},
+				{
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+					Name:        "excluded-list",
+					Description: "Get the list of excluded channels",
 				},
 			},
 		},
 	}
-
 	s.ApplicationCommandBulkOverwrite(s.State.User.ID, "", slashCommands)
 }
