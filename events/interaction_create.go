@@ -38,11 +38,8 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			"timeout": moderation.HandleTimeout,
 			"warn":    moderation.HandleWarn,
 			// Settings
-			"set-verification-role":     settings.HandleSetVerificationRole,
-			"send-verification-message": settings.HandleSendVerificationMessage,
-			"excluded-channels":         settings.HandleExcludedChannels,
-			"exclude-channel":           settings.HandleExcludeChannel,
-			"include-channel":           settings.HandleIncludeChannel,
+			"leveling":     settings.HandleLeveling,
+			"verification": settings.HandleVerification,
 		}
 
 		if handler, ok := handlers[data.Name]; ok {
