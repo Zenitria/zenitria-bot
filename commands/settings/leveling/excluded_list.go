@@ -1,4 +1,4 @@
-package settings
+package leveling
 
 import (
 	"zenitria-bot/manager"
@@ -6,7 +6,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func HandleExcludedChannels(s *discordgo.Session, i *discordgo.InteractionCreate) {
+func HandleExcludedList(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	channels := manager.GetExcludedChannels()
 
 	embed := &discordgo.MessageEmbed{

@@ -1,4 +1,4 @@
-package settings
+package verification
 
 import (
 	"fmt"
@@ -9,10 +9,10 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func HandleSetVerificationRole(s *discordgo.Session, i *discordgo.InteractionCreate) {
+func HandleRole(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	data := i.ApplicationCommandData()
 
-	role := data.Options[0].RoleValue(s, i.GuildID)
+	role := data.Options[0].Options[0].RoleValue(s, i.GuildID)
 
 	collection := database.DiscordDB.Collection("Settings")
 

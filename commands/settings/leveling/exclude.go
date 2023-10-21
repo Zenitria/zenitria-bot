@@ -1,4 +1,4 @@
-package settings
+package leveling
 
 import (
 	"fmt"
@@ -7,15 +7,15 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func HandleIncludeChannel(s *discordgo.Session, i *discordgo.InteractionCreate) {
+func HandleExclude(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	data := i.ApplicationCommandData()
 
-	channel := data.Options[0].ChannelValue(s)
+	channel := data.Options[0].Options[0].ChannelValue(s)
 
-	if !manager.IsChannelExcluded(channel.ID) {
+	if manager.IsChannelExcluded(channel.ID) {
 		embed := &discordgo.MessageEmbed{
 			Title:       "🚫・Error!",
-			Description: fmt.Sprintf("The channel %s is already included to leveling system.", channel.Mention()),
+			Description: fmt.Sprintf("The channel %s is already excluded from leveling system.", channel.Mention()),
 			Color:       0xf66555,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://media.tenor.com/hI4TN7nt06oAAAAM/error.gif",
@@ -35,11 +35,11 @@ func HandleIncludeChannel(s *discordgo.Session, i *discordgo.InteractionCreate) 
 		return
 	}
 
-	manager.IncludeChannel(channel.ID)
+	manager.ExcludeChannel(channel.ID)
 
 	embed := &discordgo.MessageEmbed{
 		Title:       "✅・Success!",
-		Description: fmt.Sprintf("The channel %s has been included to leveling system.", channel.Mention()),
+		Description: fmt.Sprintf("The channel %s has been excluded from leveling system.", channel.Mention()),
 		Color:       0x06e386,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/ikvoQAqXu9MAAAAM/success.gif",
