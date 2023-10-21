@@ -278,7 +278,7 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 
 		s.InteractionRespond(i.Interaction, response)
 	case "settings":
-		mentions := getSlashCommandMentions(s)
+		mentions := getSlashSubcommandMentions(s)
 
 		embed := &discordgo.MessageEmbed{
 			Title: "⚙️・Settings",
@@ -288,23 +288,23 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 			},
 			Fields: []*discordgo.MessageEmbedField{
 				{
-					Name:  mentions["set-verification-role"] + " [role]",
+					Name:  mentions["verification role"] + " [role]",
 					Value: "Sets the verification role.",
 				},
 				{
-					Name:  mentions["send-verification-message"] + " [channel]",
+					Name:  mentions["verification send"] + " [channel]",
 					Value: "Sends the verification message to selected channel",
 				},
 				{
-					Name:  mentions["excluded-channels"],
+					Name:  mentions["leveling excluded-list"],
 					Value: "Lists all excluded channels from the leveling system.",
 				},
 				{
-					Name:  mentions["exclude-channel"] + " [channel]",
+					Name:  mentions["leveling exclude"] + " [channel]",
 					Value: "Excludes a channel from the leveling system.",
 				},
 				{
-					Name:  mentions["include-channel"] + " [channel]",
+					Name:  mentions["leveling include"] + " [channel]",
 					Value: "Includes a channel in the leveling system.",
 				},
 			},
