@@ -50,7 +50,7 @@ func HandleClaim(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
 	embed := &discordgo.MessageEmbed{
 		Title:       "💰・Claim",
-		Description: fmt.Sprintf("You have claimed your hourly reward! You have received 💵 **%.2f**.", amount),
+		Description: fmt.Sprintf("You have received 💵 **%.2f**.", amount),
 		Color:       0x06e386,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/6Hixx4SFAeQAAAAM/backing-you-get-yours.gif",
