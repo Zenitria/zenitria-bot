@@ -7,9 +7,10 @@ import (
 )
 
 var (
-	TOKEN           string
-	MONGODB_URI     string
-	GET_XNO_API_URL string
+	TOKEN               string
+	MONGODB_URI         string
+	GET_XNO_API_URL     string
+	COMMANDS_CHANNEL_ID string
 )
 
 func init() {
@@ -18,4 +19,5 @@ func init() {
 	TOKEN = os.Getenv("TOKEN")
 	MONGODB_URI = os.Getenv("MONGODB_URI")
 	GET_XNO_API_URL = os.Getenv("GET_XNO_API_URL")
+	COMMANDS_CHANNEL_ID = os.Getenv("COMMANDS_CHANNEL_ID")
 }

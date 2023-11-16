@@ -2,11 +2,16 @@ package general
 
 import (
 	"fmt"
+	"zenitria-bot/manager"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 func HandleHelp(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	if manager.CheckCommandChannel(s, i, i.ChannelID) {
+		return
+	}
+
 	embed := &discordgo.MessageEmbed{
 		Title:       "📚・Help",
 		Description: "Select a help category to see more information about the commands.",

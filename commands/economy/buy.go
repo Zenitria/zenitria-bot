@@ -5,11 +5,16 @@ import (
 	"strings"
 	"time"
 	"zenitria-bot/code"
+	"zenitria-bot/manager"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 func HandleBuy(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	if manager.CheckCommandChannel(s, i, i.ChannelID) {
+		return
+	}
+
 	data := i.ApplicationCommandData()
 
 	item := data.Options[0].StringValue()

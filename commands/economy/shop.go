@@ -1,8 +1,16 @@
 package economy
 
-import "github.com/bwmarrin/discordgo"
+import (
+	"zenitria-bot/manager"
+
+	"github.com/bwmarrin/discordgo"
+)
 
 func HandleShop(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	if manager.CheckCommandChannel(s, i, i.ChannelID) {
+		return
+	}
+
 	embed := &discordgo.MessageEmbed{
 		Title:       "🛒・Shop",
 		Description: "You can buy items with your cash here!",

@@ -8,6 +8,10 @@ import (
 )
 
 func HandleBalance(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	if manager.CheckCommandChannel(s, i, i.ChannelID) {
+		return
+	}
+
 	data := i.ApplicationCommandData()
 
 	var user *discordgo.User

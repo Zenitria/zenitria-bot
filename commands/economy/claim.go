@@ -11,6 +11,10 @@ import (
 )
 
 func HandleClaim(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	if manager.CheckCommandChannel(s, i, i.ChannelID) {
+		return
+	}
+
 	collection := database.DiscordDB.Collection("Users")
 
 	if !manager.CheckUser(i.Member.User.ID) {
