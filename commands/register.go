@@ -11,35 +11,56 @@ func pointer[t any](v t) *t {
 func RegisterCommands(s *discordgo.Session) {
 	slashCommands := []*discordgo.ApplicationCommand{
 		// General
+		// General/Info
 		{
-			Name:         "user-info",
-			Description:  "Get information about yourself or another user",
+			Name:         "info",
+			Description:  "Get information about something",
 			DMPermission: pointer(false),
 			Options: []*discordgo.ApplicationCommandOption{
+				// General/Info/User
 				{
-					Type:        discordgo.ApplicationCommandOptionUser,
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
 					Name:        "user",
-					Description: "The user to get information about",
-					Required:    false,
+					Description: "Get information about a user",
+					Options: []*discordgo.ApplicationCommandOption{
+						{
+							Type:        discordgo.ApplicationCommandOptionUser,
+							Name:        "user",
+							Description: "The user to get information about",
+							Required:    false,
+						},
+					},
+				},
+				// General/Info/Server
+				{
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+					Name:        "server",
+					Description: "Get information about the server",
 				},
 			},
 		},
+		// General/Stats
 		{
-			Name:         "server-info",
-			Description:  "Get information about the server",
+			Name:         "stats",
+			Description:  "Get the stats of something",
 			DMPermission: pointer(false),
+			Options: []*discordgo.ApplicationCommandOption{
+				// General/Stats/Get-XNO
+				{
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+					Name:        "get-xno",
+					Description: "Get the stats of Get XNO",
+				},
+			},
 		},
-		{
-			Name:         "get-xno",
-			Description:  "Get the stats of Get XNO",
-			DMPermission: pointer(false),
-		},
+		// General/Help
 		{
 			Name:         "help",
 			Description:  "Get help with the bot",
 			DMPermission: pointer(false),
 		},
 		// Leveling
+		// Leveling/Rank
 		{
 			Name:         "rank",
 			Description:  "Get your rank or the rank of another user",
@@ -53,12 +74,14 @@ func RegisterCommands(s *discordgo.Session) {
 				},
 			},
 		},
+		// Leveling/Leaderboard
 		{
 			Name:         "leaderboard",
 			Description:  "Get the server's leaderboard",
 			DMPermission: pointer(false),
 		},
 		// Economy
+		// Economy/Balance
 		{
 			Name:         "balance",
 			Description:  "Get your balance or the balance of another user",
@@ -72,11 +95,13 @@ func RegisterCommands(s *discordgo.Session) {
 				},
 			},
 		},
+		// Economy/Shop
 		{
 			Name:         "shop",
 			Description:  "Buy items with your cash",
 			DMPermission: pointer(false),
 		},
+		// Economy/Buy
 		{
 			Name:         "buy",
 			Description:  "Buy an item from the shop",
@@ -112,12 +137,14 @@ func RegisterCommands(s *discordgo.Session) {
 				},
 			},
 		},
+		// Economy/Claim
 		{
 			Name:         "claim",
 			Description:  "Claim your hourly reward",
 			DMPermission: pointer(false),
 		},
 		// Moderation
+		// Moderation/Ban
 		{
 			Name:                     "ban",
 			Description:              "Bans a user from the server",
@@ -138,6 +165,7 @@ func RegisterCommands(s *discordgo.Session) {
 				},
 			},
 		},
+		// Moderation/Unban
 		{
 			Name:                     "unban",
 			Description:              "Unbans a user from the server",
@@ -151,6 +179,7 @@ func RegisterCommands(s *discordgo.Session) {
 				},
 			},
 		},
+		// Moderation/Kick
 		{
 			Name:                     "kick",
 			Description:              "Kicks a user from the server",
@@ -171,6 +200,7 @@ func RegisterCommands(s *discordgo.Session) {
 				},
 			},
 		},
+		// Moderation/Timeout
 		{
 			Name:                     "timeout",
 			Description:              "Timeout a user",
@@ -223,6 +253,7 @@ func RegisterCommands(s *discordgo.Session) {
 				},
 			},
 		},
+		// Moderation/Warn
 		{
 			Name:                     "warn",
 			Description:              "Warn a user",
@@ -251,6 +282,7 @@ func RegisterCommands(s *discordgo.Session) {
 			DMPermission:             pointer(false),
 			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
 			Options: []*discordgo.ApplicationCommandOption{
+				// Settings/Verification/Role
 				{
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 					Name:        "role",
@@ -264,6 +296,7 @@ func RegisterCommands(s *discordgo.Session) {
 						},
 					},
 				},
+				// Settings/Verification/Message
 				{
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 					Name:        "send",
@@ -286,6 +319,7 @@ func RegisterCommands(s *discordgo.Session) {
 			DMPermission:             pointer(false),
 			DefaultMemberPermissions: pointer[int64](discordgo.PermissionManageChannels),
 			Options: []*discordgo.ApplicationCommandOption{
+				// Settings/Leveling/Exclude
 				{
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 					Name:        "exclude",
@@ -299,6 +333,7 @@ func RegisterCommands(s *discordgo.Session) {
 						},
 					},
 				},
+				// Settings/Leveling/Include
 				{
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 					Name:        "include",
@@ -312,6 +347,7 @@ func RegisterCommands(s *discordgo.Session) {
 						},
 					},
 				},
+				// Settings/Leveling/Excluded-List
 				{
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 					Name:        "excluded-list",

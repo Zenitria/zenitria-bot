@@ -1,4 +1,4 @@
-package general
+package info
 
 import (
 	"fmt"
@@ -6,15 +6,15 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func HandleUserInfo(s *discordgo.Session, i *discordgo.InteractionCreate) {
+func HandleUser(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	data := i.ApplicationCommandData()
 
 	var user *discordgo.User
 
-	if len(data.Options) == 0 {
+	if len(data.Options[0].Options) == 0 {
 		user = i.Member.User
 	} else {
-		user = data.Options[0].UserValue(s)
+		user = data.Options[0].Options[0].UserValue(s)
 	}
 
 	member, _ := s.GuildMember(i.GuildID, user.ID)

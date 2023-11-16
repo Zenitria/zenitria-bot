@@ -7,7 +7,6 @@ import (
 	"zenitria-bot/commands/leveling"
 	"zenitria-bot/commands/moderation"
 	"zenitria-bot/commands/settings"
-	"zenitria-bot/manager"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -19,10 +18,9 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
 		handlers := map[string](func(*discordgo.Session, *discordgo.InteractionCreate)){
 			// General
-			"user-info":   general.HandleUserInfo,
-			"server-info": general.HandleServerInfo,
-			"get-xno":     general.HandleGetXNO,
-			"help":        general.HandleHelp,
+			"help":  general.HandleHelp,
+			"info":  general.HandleInfo,
+			"stats": general.HandleStats,
 			// Leveling
 			"rank":        leveling.HandleRank,
 			"leaderboard": leveling.HandleLeaderboard,
@@ -38,8 +36,7 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			"timeout": moderation.HandleTimeout,
 			"warn":    moderation.HandleWarn,
 			// Settings
-			"leveling":     settings.HandleLeveling,
-			"verification": settings.HandleVerification,
+			"leveling": settings.HandleLeveling,
 		}
 
 		if handler, ok := handlers[data.Name]; ok {
@@ -56,11 +53,6 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			"leaderboard-next-button":     leveling.HandleLeaderboardButtons,
 		}
 
-		handlersWithoutData := map[string](func(*discordgo.Session, *discordgo.InteractionCreate)){
-			// Verification
-			"verify-button": settings.HandleVerifyButton,
-		}
-
 		splitted := strings.Split(data.CustomID, "|")
 
 		if handler, ok := handlersWithData[splitted[0]]; ok {
@@ -71,22 +63,6 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
 			handler(s, i, splitted[1], data.Values[0])
 			return
-		}
-
-		if handler, ok := handlersWithoutData[data.CustomID]; ok {
-			handler(s, i)
-			return
-		}
-	case discordgo.InteractionModalSubmit:
-		data := i.ModalSubmitData()
-
-		handlers := map[string](func(*discordgo.Session, *discordgo.InteractionCreate, *discordgo.ModalSubmitInteractionData)){
-			// Verification
-			"verification-modal": manager.HandleVerification,
-		}
-
-		if handler, ok := handlers[data.CustomID]; ok {
-			handler(s, i, &data)
 		}
 	}
 }

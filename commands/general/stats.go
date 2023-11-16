@@ -1,0 +1,19 @@
+package general
+
+import (
+	"zenitria-bot/commands/general/stats"
+
+	"github.com/bwmarrin/discordgo"
+)
+
+func HandleStats(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	data := i.ApplicationCommandData()
+
+	handlers := map[string](func(*discordgo.Session, *discordgo.InteractionCreate)){
+		"get-xno": stats.HandleGetXNO,
+	}
+
+	if handler, ok := handlers[data.Options[0].Name]; ok {
+		handler(s, i)
+	}
+}

@@ -1,4 +1,4 @@
-package general
+package info
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func HandleServerInfo(s *discordgo.Session, i *discordgo.InteractionCreate) {
+func HandleServer(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	server, _ := s.State.Guild(i.GuildID)
 
 	created := server.JoinedAt.Unix()

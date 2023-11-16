@@ -8,15 +8,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func GetVerificationRole() (string, error) {
-	collection := database.DiscordDB.Collection("Settings")
-
-	var setting database.Setting
-	err := collection.FindOne(database.CTX, bson.M{"_id": "Verification Role"}).Decode(&setting)
-
-	return setting.Value.(string), err
-}
-
 func IsChannelExcluded(ch string) bool {
 	collection := database.DiscordDB.Collection("Settings")
 
