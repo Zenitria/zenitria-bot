@@ -25,7 +25,7 @@ docker build -t zenitria-bot .
 2. Run builded image
 
 ```
-docker run -d --network=host zenitria-bot
+docker run -d --network=zenitria --name=zenitria-bot --restart unless-stopped zenitria-bot
 ```
 
 ### Without Docker
