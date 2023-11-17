@@ -136,6 +136,7 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 	switch val {
 	case "general":
 		mentions := getSlashCommandMentions(s)
+		submmentions := getSlashSubcommandMentions(s)
 
 		embed := &discordgo.MessageEmbed{
 			Title: "📖・General",
@@ -145,15 +146,15 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 			},
 			Fields: []*discordgo.MessageEmbedField{
 				{
-					Name:  mentions["user-info"] + " (user)",
+					Name:  submmentions["info user"] + " (user)",
 					Value: "Shows information about yourself or another user.",
 				},
 				{
-					Name:  mentions["server-info"],
+					Name:  submmentions["info server"],
 					Value: "Shows information about the server.",
 				},
 				{
-					Name:  mentions["get-xno"],
+					Name:  submmentions["stats get-xno"],
 					Value: "Shows the stats of Get XNO.",
 				},
 				{
@@ -292,14 +293,6 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 				URL: "https://gifdb.com/images/high/need-help-baby-in-lamp-22l1cd6hndd62nkl.gif",
 			},
 			Fields: []*discordgo.MessageEmbedField{
-				{
-					Name:  mentions["verification role"] + " [role]",
-					Value: "Sets the verification role.",
-				},
-				{
-					Name:  mentions["verification send"] + " [channel]",
-					Value: "Sends the verification message to selected channel",
-				},
 				{
 					Name:  mentions["leveling excluded-list"],
 					Value: "Lists all excluded channels from the leveling system.",
