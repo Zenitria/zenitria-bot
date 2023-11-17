@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/bwmarrin/discordgo"
+	"golang.org/x/exp/slices"
 )
 
 func HandleUser(s *discordgo.Session, i *discordgo.InteractionCreate) {
@@ -43,13 +44,13 @@ func HandleUser(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	}
 
 	for _, r := range roles {
-		if r.Name == "@everyone" {
+		if len(member.Roles) == 0 && r.Name == "@everyone" {
 			role = r.ID
+			break
+		} else if slices.Contains(member.Roles, r.ID) && r.Name != "@everyone" {
+			role = r.ID
+			break
 		}
-	}
-
-	if len(member.Roles) > 0 {
-		role = member.Roles[0]
 	}
 
 	embed := &discordgo.MessageEmbed{
