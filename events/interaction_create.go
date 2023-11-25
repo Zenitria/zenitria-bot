@@ -3,6 +3,7 @@ package events
 import (
 	"strings"
 	"zenitria-bot/commands/economy"
+	"zenitria-bot/commands/events"
 	"zenitria-bot/commands/general"
 	"zenitria-bot/commands/leveling"
 	"zenitria-bot/commands/moderation"
@@ -29,6 +30,8 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			"shop":    economy.HandleShop,
 			"buy":     economy.HandleBuy,
 			"claim":   economy.HandleClaim,
+			// Events
+			"advent-calendar": events.HandleAdventCalendar,
 			// Moderation
 			"ban":     moderation.HandleBan,
 			"unban":   moderation.HandleUnban,
