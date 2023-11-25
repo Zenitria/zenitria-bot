@@ -143,6 +143,22 @@ func RegisterCommands(s *discordgo.Session) {
 			Description:  "Claim your hourly reward",
 			DMPermission: pointer(false),
 		},
+		// Events
+		// Events/Advent Calendar
+		{
+			Name:                     "advent-calendar",
+			Description:              "Set advent calendar to selected channel",
+			DMPermission:             pointer(false),
+			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionChannel,
+					Name:        "channel",
+					Description: "The channel to set advent calendar",
+					Required:    true,
+				},
+			},
+		},
 		// Moderation
 		// Moderation/Ban
 		{
@@ -275,43 +291,6 @@ func RegisterCommands(s *discordgo.Session) {
 			},
 		},
 		// Settings
-		// Settings/Verification
-		{
-			Name:                     "verification",
-			Description:              "Manage the verification system",
-			DMPermission:             pointer(false),
-			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
-			Options: []*discordgo.ApplicationCommandOption{
-				// Settings/Verification/Role
-				{
-					Type:        discordgo.ApplicationCommandOptionSubCommand,
-					Name:        "role",
-					Description: "Set the verification role",
-					Options: []*discordgo.ApplicationCommandOption{
-						{
-							Type:        discordgo.ApplicationCommandOptionRole,
-							Name:        "role",
-							Description: "The role to set as the verification role",
-							Required:    true,
-						},
-					},
-				},
-				// Settings/Verification/Message
-				{
-					Type:        discordgo.ApplicationCommandOptionSubCommand,
-					Name:        "send",
-					Description: "Send the verification message to selected channel",
-					Options: []*discordgo.ApplicationCommandOption{
-						{
-							Type:        discordgo.ApplicationCommandOptionChannel,
-							Name:        "channel",
-							Description: "The channel to send the verification message to",
-							Required:    true,
-						},
-					},
-				},
-			},
-		},
 		// Settings/Leveling
 		{
 			Name:                     "leveling",
