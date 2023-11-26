@@ -65,7 +65,7 @@ func HandleBuy(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			diamonds = 1000
 		}
 
-		code := code.GenerateCode(diamonds, 24, 1)
+		c := code.GenerateCode(diamonds, 24, 1)
 
 		updateBalance(i.Member.User.ID, -products[item])
 
@@ -89,7 +89,7 @@ func HandleBuy(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
 		embed = &discordgo.MessageEmbed{
 			Title:       "💎・Diamonds Pack",
-			Description: fmt.Sprintf("🏷️・**Code:** %s\n💎・**Diamonds:** %d\n⏳・**Expires:** <t:%d:R>\n💰・**Redeem:** http://get-xno.com/app/redeem", code, diamonds, time.Now().Add(24*time.Hour).Unix()),
+			Description: fmt.Sprintf("🏷️・**Code:** %s\n💎・**Diamonds:** %d\n⏳・**Expires:** <t:%d:R>\n💰・**Redeem:** http://get-xno.com/app/redeem", c, diamonds, time.Now().Add(24*time.Hour).Unix()),
 			Color:       0x06e386,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://i.gifer.com/90JG.gif",
