@@ -84,7 +84,7 @@ func HandleAdventCalendar(s *discordgo.Session, i *discordgo.InteractionCreate) 
 
 	scheduler := gocron.NewScheduler(time.UTC)
 
-	scheduler.Cron("30 14 * * *").LimitRunsTo(24).Do(func() {
+	scheduler.Cron("0 0 * * *").LimitRunsTo(24).Do(func() {
 		cron(s, i, channel, msg)
 	})
 
