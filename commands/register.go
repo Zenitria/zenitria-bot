@@ -159,6 +159,27 @@ func RegisterCommands(s *discordgo.Session) {
 				},
 			},
 		},
+		// Events/Send Code
+		{
+			Name:                     "send-code",
+			Description:              "Send a code to a user",
+			DMPermission:             pointer(false),
+			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionUser,
+					Name:        "user",
+					Description: "The user to send the code to",
+					Required:    true,
+				},
+				{
+					Type:        discordgo.ApplicationCommandOptionInteger,
+					Name:        "diamonds",
+					Description: "The amount of diamonds to send",
+					Required:    true,
+				},
+			},
+		},
 		// Moderation
 		// Moderation/Ban
 		{

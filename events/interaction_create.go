@@ -32,6 +32,7 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			"claim":   economy.HandleClaim,
 			// Events
 			"advent-calendar": events.HandleAdventCalendar,
+			"send-code":       events.SendCodeHandler,
 			// Moderation
 			"ban":     moderation.HandleBan,
 			"unban":   moderation.HandleUnban,
