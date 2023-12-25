@@ -200,6 +200,14 @@ func RegisterCommands(s *discordgo.Session) {
 					Description: "The reason for the ban",
 					Required:    false,
 				},
+				{
+					Type:        discordgo.ApplicationCommandOptionInteger,
+					Name:        "delete_messages",
+					Description: "The part of the user's recent message history that you want to delete",
+					Required:    false,
+					MinValue:    pointer[float64](1),
+					MaxValue:    7,
+				},
 			},
 		},
 		// Moderation/Unban

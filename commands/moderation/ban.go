@@ -12,11 +12,18 @@ func HandleBan(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	user := data.Options[0].UserValue(s)
 
 	var reason string
+	var deleteDays int
 
 	if len(data.Options) == 1 {
 		reason = "No reason provided."
+	} else if len(data.Options) == 2 && data.Options[1].Type == discordgo.ApplicationCommandOptionString {
+		reason = data.Options[1].StringValue()
+	} else if len(data.Options) == 2 && data.Options[1].Type == discordgo.ApplicationCommandOptionInteger {
+		reason = "No reason provided."
+		deleteDays = int(data.Options[1].IntValue())
 	} else {
 		reason = data.Options[1].StringValue()
+		deleteDays = int(data.Options[2].IntValue())
 	}
 
 	embed := &discordgo.MessageEmbed{
@@ -49,5 +56,5 @@ func HandleBan(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	channel, _ := s.UserChannelCreate(user.ID)
 	s.ChannelMessageSendEmbed(channel.ID, embed)
 
-	s.GuildBanCreateWithReason(i.GuildID, user.ID, reason, 0)
+	s.GuildBanCreateWithReason(i.GuildID, user.ID, reason, deleteDays)
 }
