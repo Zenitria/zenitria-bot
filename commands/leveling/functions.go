@@ -115,14 +115,18 @@ func createLeaderboardEmbedAndComponents(i *discordgo.InteractionCreate, p int) 
 	}
 
 	prevButton := &discordgo.Button{
-		Label:    "◄",
+		Emoji: discordgo.ComponentEmoji{
+			Name: "◀️",
+		},
 		Style:    discordgo.PrimaryButton,
 		Disabled: p == 1,
 		CustomID: fmt.Sprintf("leaderboard-previous-button|%s|%d", i.Member.User.ID, p-1),
 	}
 
 	nextButton := &discordgo.Button{
-		Label:    "►",
+		Emoji: discordgo.ComponentEmoji{
+			Name: "▶️",
+		},
 		Style:    discordgo.PrimaryButton,
 		Disabled: p == pages,
 		CustomID: fmt.Sprintf("leaderboard-next-button|%s|%d", i.Member.User.ID, p+1),
