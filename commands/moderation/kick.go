@@ -22,7 +22,7 @@ func HandleKick(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       fmt.Sprintf("🦵・%s has been kicked", user.Username),
 		Description: "🚨・**Reason**: " + reason + "\n🛡️・**Moderator**: " + i.Member.User.Mention(),
-		Color:       0x06e386,
+		Color:       0xB54DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/EU3Wi1GvQgkAAAAC/funny-kick.gif",
 		},
@@ -40,7 +40,7 @@ func HandleKick(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed = &discordgo.MessageEmbed{
 		Title:       "🦵・Kicked",
 		Description: "🚨・**Reason**: " + reason + "\n🛡️・**Moderator**: " + i.Member.User.Mention(),
-		Color:       0x06e386,
+		Color:       0xB54DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/EU3Wi1GvQgkAAAAC/funny-kick.gif",
 		},

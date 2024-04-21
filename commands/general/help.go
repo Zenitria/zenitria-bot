@@ -15,7 +15,7 @@ func HandleHelp(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       "📚・Help",
 		Description: "Select a help category to see more information about the commands.",
-		Color:       0x06e386,
+		Color:       0xB54DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://gifdb.com/images/high/need-help-baby-in-lamp-22l1cd6hndd62nkl.gif",
 		},
@@ -140,7 +140,7 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 
 		embed := &discordgo.MessageEmbed{
 			Title: "📖・General",
-			Color: 0x06e386,
+			Color: 0xB54DFF,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://gifdb.com/images/high/need-help-baby-in-lamp-22l1cd6hndd62nkl.gif",
 			},
@@ -178,7 +178,7 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 
 		embed := &discordgo.MessageEmbed{
 			Title: "✨・Leveling",
-			Color: 0x06e386,
+			Color: 0xB54DFF,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://gifdb.com/images/high/need-help-baby-in-lamp-22l1cd6hndd62nkl.gif",
 			},
@@ -208,7 +208,7 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 
 		embed := &discordgo.MessageEmbed{
 			Title: "💵・Economy",
-			Color: 0x06e386,
+			Color: 0xB54DFF,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://gifdb.com/images/high/need-help-baby-in-lamp-22l1cd6hndd62nkl.gif",
 			},
@@ -246,7 +246,7 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 
 		embed := &discordgo.MessageEmbed{
 			Title: "🛡️・Moderation",
-			Color: 0x06e386,
+			Color: 0xB54DFF,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://gifdb.com/images/high/need-help-baby-in-lamp-22l1cd6hndd62nkl.gif",
 			},
@@ -288,7 +288,7 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 
 		embed := &discordgo.MessageEmbed{
 			Title: "⚙️・Settings",
-			Color: 0x06e386,
+			Color: 0xB54DFF,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://gifdb.com/images/high/need-help-baby-in-lamp-22l1cd6hndd62nkl.gif",
 			},

@@ -14,7 +14,7 @@ func HandleShop(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       "🛒・Shop",
 		Description: "You can buy items with your cash here!",
-		Color:       0x06e386,
+		Color:       0xB54DFF,
 		Fields: []*discordgo.MessageEmbedField{
 			{
 				Name:  "💎・Diamonds Packs",

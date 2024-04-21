@@ -13,7 +13,7 @@ func HandleGetXNO(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       "📊・Get XNO stats",
 		Description: fmt.Sprintf("📆・**Days**: %d\n👥・**Users**: %d\n💸・**Withdrawn**: Ӿ%.2f\n📈・**Claims**: %d (%s)", platform.Days, platform.Users, platform.Withdrawn, platform.Claims, change),
-		Color:       0x06e386,
+		Color:       0xB54DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://get-xno.com/_next/image?url=%2Fimages%2Fget-xno-logo.png&w=256&q=100",
 		},

@@ -104,7 +104,7 @@ func createLeaderboardEmbedAndComponents(i *discordgo.InteractionCreate, p int) 
 
 	embed := &discordgo.MessageEmbed{
 		Title:       "🏆・Leaderboard",
-		Color:       0x06e386,
+		Color:       0xB54DFF,
 		Description: leaderboard,
 		Footer: &discordgo.MessageEmbedFooter{
 			Text: fmt.Sprintf("Page %d/%d", p, pages),

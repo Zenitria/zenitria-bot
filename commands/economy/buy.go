@@ -72,7 +72,7 @@ func HandleBuy(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		embed := &discordgo.MessageEmbed{
 			Title:       "💎・Diamonds Pack",
 			Description: "Successfully bought diamonds pack! Check your DMs for the code",
-			Color:       0x06e386,
+			Color:       0xB54DFF,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://i.gifer.com/90JG.gif",
 			},
@@ -90,7 +90,7 @@ func HandleBuy(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		embed = &discordgo.MessageEmbed{
 			Title:       "💎・Diamonds Pack",
 			Description: fmt.Sprintf("🏷️・**Code:** %s\n💎・**Diamonds:** %d\n⏳・**Expires:** <t:%d:R>\n💰・**Redeem:** http://get-xno.com/app/redeem", c, diamonds, time.Now().Add(24*time.Hour).Unix()),
-			Color:       0x06e386,
+			Color:       0xB54DFF,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://i.gifer.com/90JG.gif",
 			},

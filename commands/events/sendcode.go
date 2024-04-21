@@ -23,7 +23,7 @@ func SendCodeHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       "✅・Success!",
 		Description: fmt.Sprintf("Successfully sent a code to <@%s>.", user.ID),
-		Color:       0x06e386,
+		Color:       0xB54DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/ikvoQAqXu9MAAAAM/success.gif",
 		},
@@ -41,7 +41,7 @@ func SendCodeHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed = &discordgo.MessageEmbed{
 		Title:       "💎・Diamonds",
 		Description: fmt.Sprintf("🏷️・**Code:** %s\n💎・**Diamonds:** %d\n⏳・**Expires:** <t:%d:R>\n💰・**Redeem:** http://get-xno.com/app/redeem", c, diamonds, time.Now().Add(24*time.Hour).Unix()),
-		Color:       0x06e386,
+		Color:       0xB54DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/SAJ5PrWD0DcAAAAC/diamond.gif",
 		},

@@ -12,7 +12,7 @@ func HandleExcludedList(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       "#️⃣・Excluded channels",
 		Description: channels,
-		Color:       0x06e386,
+		Color:       0xB54DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/YrtA8A5oLrwAAAAM/excluded.gif",
 		},

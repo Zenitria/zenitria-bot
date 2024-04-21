@@ -16,7 +16,7 @@ func HandleUnban(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       fmt.Sprintf("🚷・%s has been unbanned", id),
 		Description: "🛡️・**Moderator**: " + i.Member.User.Mention(),
-		Color:       0x06e386,
+		Color:       0xB54DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/256nKc4aH94AAAAd/pls-unban-me-unban-me.gif",
 		},

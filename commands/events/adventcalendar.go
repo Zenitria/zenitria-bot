@@ -59,7 +59,7 @@ func HandleAdventCalendar(s *discordgo.Session, i *discordgo.InteractionCreate) 
 	embed := &discordgo.MessageEmbed{
 		Title:  "🎄・Advent Calendar",
 		Fields: fields,
-		Color:  0x06e386,
+		Color:  0xB54DFF,
 	}
 
 	msg, _ := s.ChannelMessageSendEmbed(channel.ID, embed)
@@ -67,7 +67,7 @@ func HandleAdventCalendar(s *discordgo.Session, i *discordgo.InteractionCreate) 
 	embed = &discordgo.MessageEmbed{
 		Title:       "✅・Success!",
 		Description: fmt.Sprintf("The advent calendar has been set on %s channel.", channel.Mention()),
-		Color:       0x06e386,
+		Color:       0xB54DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/ikvoQAqXu9MAAAAM/success.gif",
 		},
@@ -127,7 +127,7 @@ func cron(s *discordgo.Session, i *discordgo.InteractionCreate, channel *discord
 	embed := &discordgo.MessageEmbed{
 		Title:  "🎄・Advent Calendar",
 		Fields: fields,
-		Color:  0x06e386,
+		Color:  0xB54DFF,
 	}
 
 	s.ChannelMessageEditEmbed(channel.ID, msg.ID, embed)
