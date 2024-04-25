@@ -2,6 +2,8 @@ package database
 
 import (
 	"context"
+	"go.mongodb.org/mongo-driver/mongo/readconcern"
+	"go.mongodb.org/mongo-driver/mongo/writeconcern"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -12,24 +14,27 @@ var (
 	CTX       = context.TODO()
 	DiscordDB *mongo.Database
 	GetXNODB  *mongo.Database
+	Client    *mongo.Client
+	TxnOpts   = options.Transaction().SetWriteConcern(writeconcern.Majority()).SetReadConcern(readconcern.Majority())
 )
 
 func Connect(uri string, db string) *mongo.Database {
 	opts := options.Client().ApplyURI(uri)
 
-	client, err := mongo.Connect(CTX, opts)
+	var err error
+	Client, err = mongo.Connect(CTX, opts)
 
 	if err != nil {
 		panic(err)
 	}
 
-	err = client.Ping(CTX, nil)
+	err = Client.Ping(CTX, nil)
 
 	if err != nil {
 		panic("Connection error: " + err.Error())
 	}
 
-	return client.Database(db)
+	return Client.Database(db)
 }
 
 func Disconnect(db *mongo.Database) error {

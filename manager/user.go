@@ -36,19 +36,27 @@ func CheckUser(id string) bool {
 }
 
 func UpdateUser(id string, l int, xp int, n int, w int, c float32, lc time.Time) {
-	collection := database.DiscordDB.Collection("Users")
+	session, _ := database.Client.StartSession()
 
-	update := bson.M{
-		"$set": database.User{
-			ID:          id,
-			Level:       l,
-			XP:          xp,
-			NextLevelXP: n,
-			Warnings:    w,
-			Cash:        c,
-			LastClaimed: lc,
-		},
-	}
+	defer session.EndSession(database.CTX)
 
-	collection.UpdateByID(database.CTX, id, update)
+	session.WithTransaction(database.CTX, func(ctx mongo.SessionContext) (any, error) {
+		collection := database.DiscordDB.Collection("Users")
+
+		update := bson.M{
+			"$set": database.User{
+				ID:          id,
+				Level:       l,
+				XP:          xp,
+				NextLevelXP: n,
+				Warnings:    w,
+				Cash:        c,
+				LastClaimed: lc,
+			},
+		}
+
+		collection.UpdateByID(database.CTX, id, update)
+
+		return nil, nil
+	})
 }
