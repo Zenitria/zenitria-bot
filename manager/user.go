@@ -16,13 +16,21 @@ func CreateUser(id string) {
 }
 
 func GetUser(id string) database.User {
-	collection := database.DiscordDB.Collection("Users")
+	session, _ := database.Client.StartSession()
 
-	var user database.User
+	defer session.EndSession(database.CTX)
 
-	collection.FindOne(database.CTX, bson.M{"_id": id}).Decode(&user)
+	user, _ := session.WithTransaction(database.CTX, func(ctx mongo.SessionContext) (any, error) {
+		collection := database.DiscordDB.Collection("Users")
 
-	return user
+		var user database.User
+
+		collection.FindOne(database.CTX, bson.M{"_id": id}).Decode(&user)
+
+		return user, nil
+	}, database.TxnOpts)
+
+	return user.(database.User)
 }
 
 func CheckUser(id string) bool {
@@ -58,5 +66,5 @@ func UpdateUser(id string, l int, xp int, n int, w int, c float32, lc time.Time)
 		collection.UpdateByID(database.CTX, id, update)
 
 		return nil, nil
-	})
+	}, database.TxnOpts)
 }
