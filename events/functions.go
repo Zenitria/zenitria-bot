@@ -3,7 +3,7 @@ package events
 import (
 	"fmt"
 	"time"
-	"zenitria-bot/coingecko"
+	"zenitria-bot/prices"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -11,9 +11,10 @@ import (
 func updateStatus(s *discordgo.Session) {
 	for {
 		statuses := []string{
-			fmt.Sprintf("BTC: $%.2f (%s)", coingecko.Prices.Bitcoin.Price, change(coingecko.Prices.Bitcoin.Change)),
-			fmt.Sprintf("XMR: $%.2f (%s)", coingecko.Prices.Monero.Price, change(coingecko.Prices.Monero.Change)),
-			fmt.Sprintf("XNO: $%.2f (%s)", coingecko.Prices.Nano.Price, change(coingecko.Prices.Nano.Change)),
+			fmt.Sprintf("BTC: $%.2f (%s)", prices.Prices.BTC.Price, change(prices.Prices.BTC.Change)),
+			fmt.Sprintf("BAN: $%.2f (%s)", prices.Prices.BAN.Price, change(prices.Prices.BAN.Change)),
+			fmt.Sprintf("XMR: $%.2f (%s)", prices.Prices.XMR.Price, change(prices.Prices.XMR.Change)),
+			fmt.Sprintf("XNO: $%.2f (%s)", prices.Prices.XNO.Price, change(prices.Prices.XNO.Change)),
 		}
 
 		for _, st := range statuses {
@@ -34,7 +35,7 @@ func updateStatus(s *discordgo.Session) {
 	}
 }
 
-func change(c float64) string {
+func change(c float32) string {
 	if c > 0 {
 		return fmt.Sprintf("+%.2f", c) + "%"
 	}
