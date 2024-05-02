@@ -1,7 +1,6 @@
 package leveling
 
 import (
-	"fmt"
 	"strconv"
 	"zenitria-bot/manager"
 
@@ -25,11 +24,7 @@ func HandleLeaderboard(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		},
 	}
 
-	err := s.InteractionRespond(i.Interaction, response)
-
-	if err != nil {
-		fmt.Println(err)
-	}
+	s.InteractionRespond(i.Interaction, response)
 }
 
 func HandleLeaderboardButtons(s *discordgo.Session, i *discordgo.InteractionCreate, id string, p string) {
