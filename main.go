@@ -5,11 +5,11 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"zenitria-bot/coingecko"
 	"zenitria-bot/commands"
 	"zenitria-bot/config"
 	"zenitria-bot/database"
 	"zenitria-bot/events"
+	"zenitria-bot/prices"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -18,7 +18,7 @@ func main() {
 	database.DiscordDB = database.Connect(config.MONGODB_URI, "Discord")
 	database.GetXNODB = database.Connect(config.MONGODB_URI, "Get-XNO")
 
-	coingecko.Init()
+	prices.Init()
 
 	s, err := discordgo.New("Bot " + config.TOKEN)
 
