@@ -2,8 +2,7 @@ package events
 
 import (
 	"strings"
-	"zenitria-bot/commands/economy"
-	"zenitria-bot/commands/events"
+	"zenitria-bot/commands/earning"
 	"zenitria-bot/commands/general"
 	"zenitria-bot/commands/leveling"
 	"zenitria-bot/commands/moderation"
@@ -25,14 +24,11 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			// Leveling
 			"rank":        leveling.HandleRank,
 			"leaderboard": leveling.HandleLeaderboard,
-			// Economy
-			"balance": economy.HandleBalance,
-			"shop":    economy.HandleShop,
-			"buy":     economy.HandleBuy,
-			"claim":   economy.HandleClaim,
-			// Events
-			"advent-calendar": events.HandleAdventCalendar,
-			"send-code":       events.SendCodeHandler,
+			// Earning
+			"balance":  earning.HandleBalance,
+			"claim":    earning.HandleClaim,
+			"withdraw": earning.HandleWithdraw,
+			"balances": earning.HandleBalances,
 			// Moderation
 			"ban":     moderation.HandleBan,
 			"unban":   moderation.HandleUnban,

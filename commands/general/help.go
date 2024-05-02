@@ -40,8 +40,8 @@ func HandleHelp(s *discordgo.Session, i *discordgo.InteractionCreate) {
 				},
 			},
 			{
-				Label: "Economy",
-				Value: "economy",
+				Label: "Earning",
+				Value: "earning",
 				Emoji: discordgo.ComponentEmoji{
 					Name: "💵",
 				},
@@ -104,8 +104,8 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 				},
 			},
 			{
-				Label: "Economy",
-				Value: "economy",
+				Label: "Earning",
+				Value: "earning",
 				Emoji: discordgo.ComponentEmoji{
 					Name: "💵",
 				},
@@ -203,11 +203,11 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 		}
 
 		s.InteractionRespond(i.Interaction, response)
-	case "economy":
+	case "earning":
 		mentions := getSlashCommandMentions(s)
 
 		embed := &discordgo.MessageEmbed{
-			Title: "💵・Economy",
+			Title: "💵・Earning",
 			Color: 0xB54DFF,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://gifdb.com/images/high/need-help-baby-in-lamp-22l1cd6hndd62nkl.gif",
@@ -218,16 +218,16 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 					Value: "Shows your balance or the balance of another user.",
 				},
 				{
-					Name:  mentions["shop"],
-					Value: "Shows the shop.",
-				},
-				{
-					Name:  mentions["buy"] + " [item]",
-					Value: "Buys an item from the shop.",
+					Name:  mentions["withdraw"],
+					Value: "Withdraws your balance.",
 				},
 				{
 					Name:  mentions["claim"],
-					Value: "Claims your hourly reward.",
+					Value: "Claims your 15 minute reward.",
+				},
+				{
+					Name:  mentions["balances"],
+					Value: "Shows bot crypto balances.",
 				},
 			},
 		}

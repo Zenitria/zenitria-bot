@@ -59,7 +59,7 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	xp := user.XP + randNum
 	nextLevelXP := user.NextLevelXP
 	levelUP := false
-	cash := user.Cash + (float32(randNum) / 100)
+	cash := user.Cash + (float32(randNum) / 1000000)
 
 	if xp >= nextLevelXP {
 		xp -= nextLevelXP

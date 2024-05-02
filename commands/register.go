@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -80,8 +81,8 @@ func RegisterCommands(s *discordgo.Session) {
 			Description:  "Get the server's leaderboard",
 			DMPermission: pointer(false),
 		},
-		// Economy
-		// Economy/Balance
+		// Earning
+		// Earning/Balance
 		{
 			Name:         "balance",
 			Description:  "Get your balance or the balance of another user",
@@ -95,90 +96,53 @@ func RegisterCommands(s *discordgo.Session) {
 				},
 			},
 		},
-		// Economy/Shop
+		// Earning/Withdraw
 		{
-			Name:         "shop",
-			Description:  "Buy items with your cash",
-			DMPermission: pointer(false),
-		},
-		// Economy/Buy
-		{
-			Name:         "buy",
-			Description:  "Buy an item from the shop",
+			Name:         "withdraw",
+			Description:  "Withdraw your balance",
 			DMPermission: pointer(false),
 			Options: []*discordgo.ApplicationCommandOption{
 				{
+					Type:        discordgo.ApplicationCommandOptionNumber,
+					Name:        "amount",
+					Description: "The amount to withdraw",
+					Required:    true,
+				},
+				{
 					Type:        discordgo.ApplicationCommandOptionString,
-					Name:        "item",
-					Description: "The item to buy",
+					Name:        "cryptocurrency",
+					Description: "The cryptocurrency to withdraw",
 					Required:    true,
 					Choices: []*discordgo.ApplicationCommandOptionChoice{
 						{
-							Name:  "💎・Diamonds Pack: ✨・Mini (10)",
-							Value: "diamonds-mini",
+							Name:  "Nano (XNO)",
+							Value: "XNO",
 						},
 						{
-							Name:  "💎・Diamonds Pack: 🌟・Small (25)",
-							Value: "diamonds-small",
-						},
-						{
-							Name:  "💎・Diamonds Pack: 🎁・Medium (100)",
-							Value: "diamonds-medium",
-						},
-						{
-							Name:  "💎・Diamonds Pack: 🔥・Big (250)",
-							Value: "diamonds-big",
-						},
-						{
-							Name:  "💎・Diamonds Pack: 🏆・Premium (1000)",
-							Value: "diamonds-premium",
+							Name:  "Banano (BAN)",
+							Value: "BAN",
 						},
 					},
 				},
+				{
+					Type:        discordgo.ApplicationCommandOptionString,
+					Name:        "wallet_address",
+					Description: "The wallet address to withdraw to",
+					Required:    true,
+				},
 			},
 		},
-		// Economy/Claim
+		// Earning/Claim
 		{
 			Name:         "claim",
-			Description:  "Claim your hourly reward",
+			Description:  "Claim your 15 minute reward",
 			DMPermission: pointer(false),
 		},
-		// Events
-		// Events/Advent Calendar
+		// Earning/Balances
 		{
-			Name:                     "advent-calendar",
-			Description:              "Set advent calendar to selected channel",
-			DMPermission:             pointer(false),
-			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
-			Options: []*discordgo.ApplicationCommandOption{
-				{
-					Type:        discordgo.ApplicationCommandOptionChannel,
-					Name:        "channel",
-					Description: "The channel to set advent calendar",
-					Required:    true,
-				},
-			},
-		},
-		// Events/Send Code
-		{
-			Name:                     "send-code",
-			Description:              "Send a code to a user",
-			DMPermission:             pointer(false),
-			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
-			Options: []*discordgo.ApplicationCommandOption{
-				{
-					Type:        discordgo.ApplicationCommandOptionUser,
-					Name:        "user",
-					Description: "The user to send the code to",
-					Required:    true,
-				},
-				{
-					Type:        discordgo.ApplicationCommandOptionInteger,
-					Name:        "diamonds",
-					Description: "The amount of diamonds to send",
-					Required:    true,
-				},
-			},
+			Name:         "balances",
+			Description:  "Get the bot crypto balances.",
+			DMPermission: pointer(false),
 		},
 		// Moderation
 		// Moderation/Ban
@@ -364,5 +328,10 @@ func RegisterCommands(s *discordgo.Session) {
 			},
 		},
 	}
-	s.ApplicationCommandBulkOverwrite(s.State.User.ID, "", slashCommands)
+
+	_, err := s.ApplicationCommandBulkOverwrite(s.State.User.ID, "", slashCommands)
+
+	if err != nil {
+		fmt.Println(err)
+	}
 }
