@@ -1,4 +1,4 @@
-package coingecko
+package prices
 
 var (
 	Prices Coins

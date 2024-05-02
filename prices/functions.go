@@ -1,14 +1,15 @@
-package coingecko
+package prices
 
 import (
 	"encoding/json"
 	"io"
 	"net/http"
 	"time"
+	"zenitria-bot/config"
 )
 
 func getPrices() Coins {
-	url := "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,monero,nano&vs_currencies=usd&include_24hr_change=true"
+	url := config.ZENITRIA_API_URL + "/price/ban,btc,xmr,xno"
 
 	req, _ := http.NewRequest("GET", url, nil)
 	res, err := http.DefaultClient.Do(req)

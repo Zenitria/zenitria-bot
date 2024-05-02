@@ -29,7 +29,7 @@ func HandleClaim(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	if nextClaimDate.After(time.Now()) {
 		embed := &discordgo.MessageEmbed{
 			Title:       "🚫・Error!",
-			Description: fmt.Sprintf("You have already claimed your hourly reward! Next claim <t:%d:R>.", nextClaimDate.Unix()),
+			Description: fmt.Sprintf("You have already claimed your 15 minute reward! Next claim <t:%d:R>.", nextClaimDate.Unix()),
 			Color:       0xf66555,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://media.tenor.com/hI4TN7nt06oAAAAM/error.gif",
@@ -48,13 +48,9 @@ func HandleClaim(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		return
 	}
 
-	amount := 0.1 + (float32(user.Level) * 0.1)
-
-	manager.UpdateUser(i.Member.User.ID, user.Level, user.XP, user.NextLevelXP, user.Warnings, user.Cash+amount, time.Now())
-
 	embed := &discordgo.MessageEmbed{
 		Title:       "💰・Claim",
-		Description: fmt.Sprintf("You have received 💵 **%.2f**.", amount),
+		Description: fmt.Sprintf("Click [here](https://zenitria.com/bot/claim/%s) to claim your 15 minute reward!", i.Member.User.ID),
 		Color:       0xB54DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/6Hixx4SFAeQAAAAM/backing-you-get-yours.gif",

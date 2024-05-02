@@ -4,10 +4,10 @@ import (
 	"zenitria-bot/manager"
 )
 
-func checkBalance(id string, price float32) bool {
+func checkBalance(id string, am float32) bool {
 	user := manager.GetUser(id)
 
-	return user.Cash >= price
+	return user.Cash >= am
 }
 
 func updateBalance(id string, am float32) {
