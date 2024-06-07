@@ -2,34 +2,22 @@ package earning
 
 import (
 	"fmt"
-	"time"
-	"zenitria-bot/database"
-	"zenitria-bot/manager"
-
 	"github.com/bwmarrin/discordgo"
 	"go.mongodb.org/mongo-driver/bson"
+	"zenitria-bot/database"
+	"zenitria-bot/manager"
 )
 
-func HandleClaim(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	if manager.CheckCommandChannel(s, i, i.ChannelID) {
-		return
-	}
+func HandleAddDollars(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	data := i.ApplicationCommandData()
 
-	collection := database.DiscordDB.Collection("Users")
+	member := data.Options[0].UserValue(s)
+	amount := data.Options[1].FloatValue()
 
-	if !manager.CheckUser(i.Member.User.ID) {
-		manager.CreateUser(i.Member.User.ID)
-	}
-
-	var user database.User
-	collection.FindOne(database.CTX, bson.M{"_id": i.Member.User.ID}).Decode(&user)
-
-	nextClaimDate := user.LastClaimed.Add(15 * time.Minute)
-
-	if nextClaimDate.After(time.Now()) {
+	if amount < 0 {
 		embed := &discordgo.MessageEmbed{
 			Title:       "🚫・Error!",
-			Description: fmt.Sprintf("You have already claimed your 15 minute reward! Next claim <t:%d:R>.", nextClaimDate.Unix()),
+			Description: "You can't add negative dollars!",
 			Color:       0xf66555,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://media.tenor.com/hI4TN7nt06oAAAAM/error.gif",
@@ -48,12 +36,24 @@ func HandleClaim(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		return
 	}
 
+	collection := database.DiscordDB.Collection("Users")
+
+	if !manager.CheckUser(member.ID) {
+		manager.CreateUser(member.ID)
+	}
+
+	var user database.User
+	collection.FindOne(database.CTX, bson.M{"_id": member.ID}).Decode(&user)
+
+	user.Cash += amount
+	manager.UpdateUser(member.ID, user.Level, user.XP, user.NextLevelXP, user.Warnings, user.Cash, user.LastClaimed)
+
 	embed := &discordgo.MessageEmbed{
-		Title:       "💰・Claim",
-		Description: fmt.Sprintf("[Click here](https://zenitria.dev/bot/claim/%s) to claim your 15 minute reward!", i.Member.User.ID),
+		Title:       "✅・Success!",
+		Description: fmt.Sprintf("Successfully added $%s to %s's balance!", formatFloat(amount), member.Mention()),
 		Color:       0xB54DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
-			URL: "https://media.tenor.com/6Hixx4SFAeQAAAAM/backing-you-get-yours.gif",
+			URL: "https://media.tenor.com/ikvoQAqXu9MAAAAM/success.gif",
 		},
 	}
 

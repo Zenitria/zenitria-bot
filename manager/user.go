@@ -43,7 +43,7 @@ func CheckUser(id string) bool {
 	return err != mongo.ErrNoDocuments
 }
 
-func UpdateUser(id string, l int, xp int, n int, w int, c float32, lc time.Time) {
+func UpdateUser(id string, l int, xp int, n int, w int, c float64, lc time.Time) {
 	session, _ := database.Client.StartSession()
 
 	defer session.EndSession(database.CTX)

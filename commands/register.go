@@ -52,6 +52,12 @@ func RegisterCommands(s *discordgo.Session) {
 					Name:        "get-xno",
 					Description: "Get the stats of Get XNO",
 				},
+				// General/Stats/Get-BAN
+				{
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+					Name:        "get-ban",
+					Description: "Get the stats of Get BAN",
+				},
 			},
 		},
 		// General/Help
@@ -143,6 +149,33 @@ func RegisterCommands(s *discordgo.Session) {
 			Name:         "balances",
 			Description:  "Get the bot crypto balances.",
 			DMPermission: pointer(false),
+		},
+		// Earning/Rich List
+		{
+			Name:         "rich-list",
+			Description:  "Get the server's rich list",
+			DMPermission: pointer(false),
+		},
+		// Earning/Add Dollars
+		{
+			Name:                     "add-dollars",
+			Description:              "Add dollars to a user",
+			DMPermission:             pointer(false),
+			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionUser,
+					Name:        "user",
+					Description: "The user to add dollars to",
+					Required:    true,
+				},
+				{
+					Type:        discordgo.ApplicationCommandOptionNumber,
+					Name:        "amount",
+					Description: "The amount of dollars to add",
+					Required:    true,
+				},
+			},
 		},
 		// Moderation
 		// Moderation/Ban
@@ -280,6 +313,19 @@ func RegisterCommands(s *discordgo.Session) {
 					Name:        "reason",
 					Description: "The reason for the warn",
 					Required:    false,
+				},
+			},
+		},
+		// Moderation/Warns
+		{
+			Name:         "warns",
+			Description:  "Get your warns or the warns of another user",
+			DMPermission: pointer(false),
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionUser,
+					Name:        "user",
+					Description: "The user to get the warns of",
 				},
 			},
 		},

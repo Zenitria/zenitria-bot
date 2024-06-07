@@ -229,6 +229,14 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 					Name:  mentions["balances"],
 					Value: "Shows bot crypto balances.",
 				},
+				{
+					Name:  mentions["rich-list"],
+					Value: "Shows the server's rich list.",
+				},
+				{
+					Name:  mentions["add-dollars"] + " [user] [amount]",
+					Value: "Adds dollars to a user.",
+				},
 			},
 		}
 
@@ -270,6 +278,10 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 				{
 					Name:  mentions["warn"] + " [user] (reason)",
 					Value: "Warns a user.",
+				},
+				{
+					Name:  mentions["warns"] + " (user)",
+					Value: "Shows your warns or the warns of another user.",
 				},
 			},
 		}

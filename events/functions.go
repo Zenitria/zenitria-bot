@@ -2,7 +2,10 @@ package events
 
 import (
 	"fmt"
+	"github.com/go-co-op/gocron"
 	"time"
+	"zenitria-bot/codes"
+	"zenitria-bot/config"
 	"zenitria-bot/prices"
 
 	"github.com/bwmarrin/discordgo"
@@ -35,10 +38,31 @@ func updateStatus(s *discordgo.Session) {
 	}
 }
 
-func change(c float32) string {
+func change(c float64) string {
 	if c > 0 {
 		return fmt.Sprintf("+%.2f", c) + "%"
 	}
 
 	return fmt.Sprintf("%.2f", c) + "%"
+}
+
+func sendWeeklyCode(s *discordgo.Session) {
+	code, expires := codes.GenerateCode(50, 24, 0)
+
+	embed := &discordgo.MessageEmbed{
+		Title:       "💎・Diamonds Code",
+		Description: fmt.Sprintf("🏷️・**Code:** %s\n💎・**Diamonds:** 50\n⏳・**Expires:** <t:%d:R>\n💰・**Redeem:** [Get XNO](https://get-xno.com/app/redeem) & [Get BAN](https://get-ban.com/app/redeem)", code, expires.Unix()),
+		Color:       0xB54DFF,
+		Thumbnail: &discordgo.MessageEmbedThumbnail{
+			URL: "https://media.tenor.com/SAJ5PrWD0DcAAAAC/diamond.gif",
+		},
+	}
+
+	s.ChannelMessageSendEmbed(config.CODES_CHANNEL_ID, embed)
+}
+
+func weeklyCode(s *discordgo.Session) {
+	scheduler := gocron.NewScheduler(time.UTC)
+	scheduler.Cron("0 18 * * 5").Do(sendWeeklyCode, s)
+	scheduler.StartAsync()
 }

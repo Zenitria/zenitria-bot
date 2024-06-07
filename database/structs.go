@@ -8,12 +8,12 @@ type User struct {
 	XP          int       `bson:"xp"`
 	NextLevelXP int       `bson:"nextLevelXP"`
 	Warnings    int       `bson:"warnings"`
-	Cash        float32   `bson:"cash"`
+	Cash        float64   `bson:"cash"`
 	LastClaimed time.Time `bson:"lastClaimed"`
 }
 
 type Code struct {
-	Code      string    `bson:"code"`
+	Code      string    `bson:"codes"`
 	Amount    int       `bson:"amount"`
 	ExpiresAt time.Time `bson:"expiresAt"`
 	Uses      int       `bson:"uses"`

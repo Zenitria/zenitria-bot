@@ -25,16 +25,19 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			"rank":        leveling.HandleRank,
 			"leaderboard": leveling.HandleLeaderboard,
 			// Earning
-			"balance":  earning.HandleBalance,
-			"claim":    earning.HandleClaim,
-			"withdraw": earning.HandleWithdraw,
-			"balances": earning.HandleBalances,
+			"balance":     earning.HandleBalance,
+			"claim":       earning.HandleClaim,
+			"withdraw":    earning.HandleWithdraw,
+			"balances":    earning.HandleBalances,
+			"rich-list":   earning.HandleRichList,
+			"add-dollars": earning.HandleAddDollars,
 			// Moderation
 			"ban":     moderation.HandleBan,
 			"unban":   moderation.HandleUnban,
 			"kick":    moderation.HandleKick,
 			"timeout": moderation.HandleTimeout,
 			"warn":    moderation.HandleWarn,
+			"warns":   moderation.HandleWarns,
 			// Settings
 			"leveling": settings.HandleLeveling,
 		}
@@ -51,6 +54,9 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			// Leaderboard
 			"leaderboard-previous-button": leveling.HandleLeaderboardButtons,
 			"leaderboard-next-button":     leveling.HandleLeaderboardButtons,
+			// Rich List
+			"rich-list-previous-button": earning.HandleRichListButtons,
+			"rich-list-next-button":     earning.HandleRichListButtons,
 		}
 
 		splitted := strings.Split(data.CustomID, "|")

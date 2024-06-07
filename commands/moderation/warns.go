@@ -1,17 +1,11 @@
-package earning
+package moderation
 
 import (
 	"fmt"
-	"zenitria-bot/manager"
-
 	"github.com/bwmarrin/discordgo"
 )
 
-func HandleBalance(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	if manager.CheckCommandChannel(s, i, i.ChannelID) {
-		return
-	}
-
+func HandleWarns(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	data := i.ApplicationCommandData()
 
 	var user *discordgo.User
@@ -22,11 +16,11 @@ func HandleBalance(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		user = data.Options[0].UserValue(s)
 	}
 
-	userInfo := manager.GetUser(user.ID)
+	warns := getWarns(user.ID)
 
 	embed := &discordgo.MessageEmbed{
-		Title:       fmt.Sprintf("🏦・%s's balance", user.Username),
-		Description: fmt.Sprintf("💵・**Money**: $%s", formatFloat(userInfo.Cash)),
+		Title:       fmt.Sprintf("⚠️・%s's warns", user.Username),
+		Description: fmt.Sprintf("⚠️・**Warns**: %d", warns),
 		Color:       0xB54DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: user.AvatarURL(""),

@@ -16,6 +16,7 @@ func HandleStats(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
 	handlers := map[string](func(*discordgo.Session, *discordgo.InteractionCreate)){
 		"get-xno": stats.HandleGetXNO,
+		"get-ban": stats.HandleGetBAN,
 	}
 
 	if handler, ok := handlers[data.Options[0].Name]; ok {

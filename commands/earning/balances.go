@@ -115,12 +115,12 @@ func HandleBalances(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		Fields: []*discordgo.MessageEmbedField{
 			{
 				Name:   "XNO",
-				Value:  fmt.Sprintf("Ӿ%s ($%f)", balXno, float32(balXnoFloat)*prices.Prices.XNO.Price),
+				Value:  fmt.Sprintf("Ӿ%s ($%s)", balXno, formatFloat(balXnoFloat*prices.Prices.XNO.Price)),
 				Inline: false,
 			},
 			{
 				Name:   "BAN",
-				Value:  fmt.Sprintf("%s BAN ($%f)", balBan, float32(balBanFloat)*prices.Prices.BAN.Price),
+				Value:  fmt.Sprintf("%s BAN ($%s)", balBan, formatFloat(balBanFloat*prices.Prices.BAN.Price)),
 				Inline: false,
 			},
 		},

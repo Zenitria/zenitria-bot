@@ -22,7 +22,7 @@ func HandleWithdraw(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		return
 	}
 
-	amount := float32(data.Options[0].FloatValue())
+	amount := data.Options[0].FloatValue()
 	crypto := data.Options[1].StringValue()
 	wallet := data.Options[2].StringValue()
 

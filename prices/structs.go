@@ -1,8 +1,8 @@
 package prices
 
 type Price struct {
-	Price  float32 `json:"price"`
-	Change float32 `json:"change24h"`
+	Price  float64 `json:"price"`
+	Change float64 `json:"change24h"`
 }
 
 type Coins struct {

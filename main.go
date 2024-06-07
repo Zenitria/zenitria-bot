@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"zenitria-bot/api"
 	"zenitria-bot/commands"
 	"zenitria-bot/config"
 	"zenitria-bot/database"
@@ -17,6 +18,7 @@ import (
 func main() {
 	database.DiscordDB = database.Connect(config.MONGODB_URI, "Discord")
 	database.GetXNODB = database.Connect(config.MONGODB_URI, "Get-XNO")
+	database.GetBANDB = database.Connect(config.MONGODB_URI, "Get-BAN")
 
 	prices.Init()
 
@@ -44,6 +46,11 @@ func main() {
 		s.Close()
 		database.Disconnect(database.DiscordDB)
 		database.Disconnect(database.GetXNODB)
+		database.Disconnect(database.GetBANDB)
+	}()
+
+	go func() {
+		api.StartAPI(s)
 	}()
 
 	sc := make(chan os.Signal, 1)

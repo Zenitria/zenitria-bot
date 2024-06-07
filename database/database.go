@@ -14,6 +14,7 @@ var (
 	CTX       = context.TODO()
 	DiscordDB *mongo.Database
 	GetXNODB  *mongo.Database
+	GetBANDB  *mongo.Database
 	Client    *mongo.Client
 	TxnOpts   = options.Transaction().SetWriteConcern(writeconcern.Majority()).SetReadConcern(readconcern.Majority())
 )
