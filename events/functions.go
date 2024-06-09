@@ -59,6 +59,7 @@ func sendWeeklyCode(s *discordgo.Session) {
 	}
 
 	s.ChannelMessageSendEmbed(config.CODES_CHANNEL_ID, embed)
+	s.ChannelMessageSend(config.CODES_CHANNEL_ID, fmt.Sprintf("<@&%s>", config.CODES_ROLE_ID))
 }
 
 func weeklyCode(s *discordgo.Session) {
