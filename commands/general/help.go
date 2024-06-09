@@ -158,6 +158,10 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 					Value: "Shows the stats of Get XNO.",
 				},
 				{
+					Name:  submmentions["stats get-ban"],
+					Value: "Shows the stats of Get BAN.",
+				},
+				{
 					Name:  mentions["help"],
 					Value: "Shows this help menu.",
 				},
