@@ -7,5 +7,5 @@ RUN go build
 FROM alpine:latest as run
 WORKDIR /bot
 COPY --from=build /build/ .
-RUN echo "nameserver 1.1.1.1" >> /etc/resolv.conf
+COPY resolv.conf /etc/resolv.conf
 CMD ./zenitria-bot
