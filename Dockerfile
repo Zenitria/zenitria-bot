@@ -7,5 +7,5 @@ RUN go build
 FROM alpine:latest as run
 WORKDIR /bot
 COPY --from=build /build/ .
-COPY resolv.conf /etc/resolv.conf
+CMD ./dns.sh
 CMD ./zenitria-bot
