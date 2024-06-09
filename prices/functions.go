@@ -11,8 +11,7 @@ import (
 func getPrices() Coins {
 	url := config.ZENITRIA_API_URL + "/price/ban,btc,xmr,xno"
 
-	req, _ := http.NewRequest("GET", url, nil)
-	res, err := http.DefaultClient.Do(req)
+	res, err := http.Get(url)
 
 	if err != nil {
 		return Coins{}
