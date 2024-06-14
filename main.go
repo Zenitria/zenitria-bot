@@ -30,6 +30,7 @@ func main() {
 	}
 
 	s.AddHandler(events.Ready)
+	s.AddHandler(events.Disconnenct)
 	s.AddHandler(events.InteractionCreate)
 	s.AddHandler(events.MessageCreate)
 

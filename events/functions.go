@@ -11,6 +11,10 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+var (
+	weeklyCodeScheduler *gocron.Scheduler
+)
+
 func updateStatus(s *discordgo.Session) {
 	for {
 		statuses := []string{
@@ -63,7 +67,15 @@ func sendWeeklyCode(s *discordgo.Session) {
 }
 
 func weeklyCode(s *discordgo.Session) {
-	scheduler := gocron.NewScheduler(time.UTC)
-	scheduler.Cron("0 18 * * 5").Do(sendWeeklyCode, s)
-	scheduler.StartAsync()
+	weeklyCodeScheduler = gocron.NewScheduler(time.UTC)
+	weeklyCodeScheduler.Cron("0 18 * * 5").Do(sendWeeklyCode, s)
+	weeklyCodeScheduler.StartAsync()
+}
+
+func removeWeeklyCodeCron() {
+	if weeklyCodeScheduler != nil {
+		weeklyCodeScheduler.Clear()
+		weeklyCodeScheduler.Stop()
+		weeklyCodeScheduler = nil
+	}
 }
