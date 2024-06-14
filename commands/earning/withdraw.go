@@ -206,7 +206,7 @@ func HandleWithdraw(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			return
 		}
 
-		sendSuccess(s, i, amount, hash, "https://nanolooker.com/block/")
+		sendSuccess(s, i, amount, hash, "https://blocklattice.io/block/")
 		return
 	} else if crypto == "BAN" {
 		if !bananogo.AddressIsValid(wallet) {
