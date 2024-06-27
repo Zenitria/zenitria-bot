@@ -60,6 +60,13 @@ func RegisterCommands(s *discordgo.Session) {
 				},
 			},
 		},
+		/// General/Send Code
+		{
+			Name:                     "send-code",
+			Description:              "Sends code to the codes channel",
+			DMPermission:             pointer(false),
+			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
+		},
 		// General/Help
 		{
 			Name:         "help",

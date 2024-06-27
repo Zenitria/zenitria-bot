@@ -162,6 +162,10 @@ func HandleHelpMenu(s *discordgo.Session, i *discordgo.InteractionCreate, id str
 					Value: "Shows the stats of Get BAN.",
 				},
 				{
+					Name:  mentions["send-code"],
+					Value: "Sends code to the codes channel.",
+				},
+				{
 					Name:  mentions["help"],
 					Value: "Shows this help menu.",
 				},

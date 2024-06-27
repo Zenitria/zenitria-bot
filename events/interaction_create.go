@@ -18,9 +18,10 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
 		handlers := map[string](func(*discordgo.Session, *discordgo.InteractionCreate)){
 			// General
-			"help":  general.HandleHelp,
-			"info":  general.HandleInfo,
-			"stats": general.HandleStats,
+			"help":      general.HandleHelp,
+			"info":      general.HandleInfo,
+			"stats":     general.HandleStats,
+			"send-code": general.HandleSendCode,
 			// Leveling
 			"rank":        leveling.HandleRank,
 			"leaderboard": leveling.HandleLeaderboard,
