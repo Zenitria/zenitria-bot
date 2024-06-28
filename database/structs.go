@@ -13,7 +13,7 @@ type User struct {
 }
 
 type Code struct {
-	Code      string    `bson:"codes"`
+	Code      string    `bson:"code"`
 	Amount    int       `bson:"amount"`
 	ExpiresAt time.Time `bson:"expiresAt"`
 	Uses      int       `bson:"uses"`
