@@ -27,7 +27,7 @@ func HandleTimeout(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       fmt.Sprintf("🔇・%s has been timed out", user.Username),
 		Description: fmt.Sprintf("🚨・**Reason**: %s\n⏳・**Duration**: %s\n🛡️・**Moderator**: %s", reason, durationString, i.Member.User.Mention()),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media1.giphy.com/media/A9FvmJdp3F8hNZK9Ra/200w.gif",
 		},
@@ -45,7 +45,7 @@ func HandleTimeout(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed = &discordgo.MessageEmbed{
 		Title:       "🔇・Timeout",
 		Description: fmt.Sprintf("🚨・**Reason**: %s\n⏳・**Duration**: %s\n🛡️・**Moderator**: %s", reason, durationString, i.Member.User.Mention()),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media1.giphy.com/media/A9FvmJdp3F8hNZK9Ra/200w.gif",
 		},

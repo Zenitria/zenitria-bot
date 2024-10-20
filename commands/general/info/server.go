@@ -14,7 +14,7 @@ func HandleServer(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       fmt.Sprintf("🌐・Information about %s", server.Name),
 		Description: fmt.Sprintf("🏷️・**Name**: %s\n🆔・**ID**: %s\n👑・**Owner**: <@%s>\n👥・**Members**: %d\n🏆・**Boost Tier**: %d\n🚀・**Boosts**: %d\n#️⃣・**Channels**: %d\n🎓・**Roles**: %d\n🙂・**Emojis**: %d\n📆・**Creation Date**: <t:%d>", server.Name, server.ID, server.OwnerID, server.MemberCount, int(server.PremiumTier), server.PremiumSubscriptionCount, len(server.Channels), len(server.Roles), len(server.Emojis), created),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: server.IconURL(""),
 		},

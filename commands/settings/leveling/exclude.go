@@ -40,7 +40,7 @@ func HandleExclude(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       "✅・Success!",
 		Description: fmt.Sprintf("The channel %s has been excluded from leveling system.", channel.Mention()),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/ikvoQAqXu9MAAAAM/success.gif",
 		},

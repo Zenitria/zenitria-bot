@@ -32,7 +32,7 @@ func StartAPI(s *discordgo.Session) {
 			embed := &discordgo.MessageEmbed{
 				Title:       data.Title,
 				Description: data.Description,
-				Color:       0xB54DFF,
+				Color:       0xBE4DFF,
 				Thumbnail: &discordgo.MessageEmbedThumbnail{
 					URL: data.Thumbnail,
 				},
@@ -52,7 +52,7 @@ func StartAPI(s *discordgo.Session) {
 			embed := &discordgo.MessageEmbed{
 				Title:       "⏰・Next Claim",
 				Description: fmt.Sprintf("You can claim your 15 minute reward now! [Click here](https://zenitria.dev/bot/claim/%s) to claim it.", id),
-				Color:       0xB54DFF,
+				Color:       0xBE4DFF,
 			}
 
 			channel, _ := s.UserChannelCreate(id)

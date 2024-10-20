@@ -14,7 +14,7 @@ func HandleBalances(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       "📊・Balances",
 		Description: "Please wait while we fetch balances...",
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 	}
 
 	response := &discordgo.InteractionResponse{
@@ -111,7 +111,7 @@ func HandleBalances(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed = &discordgo.MessageEmbed{
 		Title:       "📊・Balances",
 		Description: "Here are our balances:",
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Fields: []*discordgo.MessageEmbedField{
 			{
 				Name:   "XNO",

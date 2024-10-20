@@ -48,7 +48,7 @@ func sendSuccess(s *discordgo.Session, i *discordgo.InteractionCreate, am float6
 	embed := &discordgo.MessageEmbed{
 		Title:       "💸・Withdraw",
 		Description: fmt.Sprintf("The **$%f** was withdrawn successfully!", am),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://i.gifer.com/90JG.gif",
 		},
@@ -65,7 +65,7 @@ func sendSuccess(s *discordgo.Session, i *discordgo.InteractionCreate, am float6
 	embed = &discordgo.MessageEmbed{
 		Title:       "💸・Withdraw",
 		Description: fmt.Sprintf("💰・**Amount:** $%f\n⛓️・**TxID:** [%s](%s)\n", am, tx, explorer+tx),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://i.gifer.com/90JG.gif",
 		},
@@ -137,7 +137,7 @@ func createRichListEmbedAndComponents(i *discordgo.InteractionCreate, p int) (*d
 
 	embed := &discordgo.MessageEmbed{
 		Title:       "💰・Rich List",
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Description: richList,
 		Footer: &discordgo.MessageEmbedFooter{
 			Text: fmt.Sprintf("Page %d/%d", p, pages),

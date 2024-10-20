@@ -21,7 +21,7 @@ func HandleWarns(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       fmt.Sprintf("⚠️・%s's warns", user.Username),
 		Description: fmt.Sprintf("⚠️・**Warns**: %d", warns),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: user.AvatarURL(""),
 		},

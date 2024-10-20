@@ -25,7 +25,7 @@ func HandleWarn(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       fmt.Sprintf("⚠️・%s has been warned", user.Username),
 		Description: fmt.Sprintf("🚨・**Reason**: %s\n⚠️・**Warns**: %d\n🛡️・**Moderator**: %s", reason, warns, i.Member.User.Mention()),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/sLgNruA4tsgAAAAC/warning-lights.gif",
 		},
@@ -43,7 +43,7 @@ func HandleWarn(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed = &discordgo.MessageEmbed{
 		Title:       "⚠️・Warn",
 		Description: fmt.Sprintf("🚨・**Reason**: %s\n⚠️・**Warns**: %d\n🛡️・**Moderator**: %s", reason, warns, i.Member.User.Mention()),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/sLgNruA4tsgAAAAC/warning-lights.gif",
 		},

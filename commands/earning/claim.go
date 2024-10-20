@@ -51,7 +51,7 @@ func HandleClaim(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       "💰・Claim",
 		Description: fmt.Sprintf("[Click here](https://zenitria.dev/bot/claim/%s) to claim your 15 minute reward!", i.Member.User.ID),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://media.tenor.com/6Hixx4SFAeQAAAAM/backing-you-get-yours.gif",
 		},

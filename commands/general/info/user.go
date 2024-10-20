@@ -55,7 +55,7 @@ func HandleUser(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
 	embed := &discordgo.MessageEmbed{
 		Title: fmt.Sprintf("👤・Information about %s", user.Username),
-		Color: 0xB54DFF,
+		Color: 0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: user.AvatarURL(""),
 		},

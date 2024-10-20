@@ -13,7 +13,7 @@ func HandleGetBAN(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       "📊・Get BAN stats",
 		Description: fmt.Sprintf("📆・**Days**: %d\n👥・**Users**: %d\n💸・**Withdrawn**: %.2f BAN\n📈・**Claims**: %d (%s)", platform.Days, platform.Users, platform.Withdrawn, platform.Claims, change),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://get-ban.com/_next/image?url=%2Fimages%2Fget-ban-logo.png&w=256&q=100",
 		},

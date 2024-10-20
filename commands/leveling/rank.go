@@ -29,7 +29,7 @@ func HandleRank(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       fmt.Sprintf("🥇・%s's rank", user.Username),
 		Description: fmt.Sprintf("✨・**Level**: %d\n🎯・**XP**: %s (%d/%d)\n🥇・**Rank**: %d/%d", userInfo.Level, progressBar(userInfo.XP, userInfo.NextLevelXP), userInfo.XP, userInfo.NextLevelXP, rank, lastRank),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: user.AvatarURL(""),
 		},

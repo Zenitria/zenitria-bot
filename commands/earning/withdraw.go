@@ -97,7 +97,7 @@ func HandleWithdraw(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		embed := &discordgo.MessageEmbed{
 			Title:       "💸・Withdraw",
 			Description: "Withdraw in progress...",
-			Color:       0xB54DFF,
+			Color:       0xBE4DFF,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://i.gifer.com/90JG.gif",
 			},
@@ -235,7 +235,7 @@ func HandleWithdraw(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		embed := &discordgo.MessageEmbed{
 			Title:       "💸・Withdraw",
 			Description: "Withdraw in progress...",
-			Color:       0xB54DFF,
+			Color:       0xBE4DFF,
 			Thumbnail: &discordgo.MessageEmbedThumbnail{
 				URL: "https://i.gifer.com/90JG.gif",
 			},

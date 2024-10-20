@@ -27,7 +27,7 @@ func HandleBalance(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	embed := &discordgo.MessageEmbed{
 		Title:       fmt.Sprintf("🏦・%s's balance", user.Username),
 		Description: fmt.Sprintf("💵・**Money**: $%s", formatFloat(userInfo.Cash)),
-		Color:       0xB54DFF,
+		Color:       0xBE4DFF,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: user.AvatarURL(""),
 		},
