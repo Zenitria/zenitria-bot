@@ -184,6 +184,22 @@ func RegisterCommands(s *discordgo.Session) {
 				},
 			},
 		},
+		// Events
+		// Events/Advent Calendar
+		{
+			Name:                     "advent-calendar",
+			Description:              "Set advent calendar to selected channel",
+			DMPermission:             pointer(false),
+			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionChannel,
+					Name:        "channel",
+					Description: "The channel to set advent calendar",
+					Required:    true,
+				},
+			},
+		},
 		// Moderation
 		// Moderation/Ban
 		{
