@@ -200,6 +200,33 @@ func RegisterCommands(s *discordgo.Session) {
 				},
 			},
 		},
+		// Events/Fix Advent Calendar
+		{
+			Name:                     "fix-advent-calendar",
+			Description:              "Fix advent calendar",
+			DMPermission:             pointer(false),
+			DefaultMemberPermissions: pointer[int64](discordgo.PermissionAdministrator),
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionChannel,
+					Name:        "channel",
+					Description: "The channel to fix advent calendar",
+					Required:    true,
+				},
+				{
+					Type:        discordgo.ApplicationCommandOptionString,
+					Name:        "message_id",
+					Description: "The message ID of the advent calendar message",
+					Required:    true,
+				},
+				{
+					Type:        discordgo.ApplicationCommandOptionString,
+					Name:        "codes",
+					Description: "The list of generated codes",
+					Required:    true,
+				},
+			},
+		},
 		// Moderation
 		// Moderation/Ban
 		{

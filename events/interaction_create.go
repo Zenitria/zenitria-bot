@@ -34,13 +34,14 @@ func InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			"rich-list":   earning.HandleRichList,
 			"add-dollars": earning.HandleAddDollars,
 			// Events
-			"advent-calendar": events.HandleAdventCalendar,
-			"ban":             moderation.HandleBan,
-			"unban":           moderation.HandleUnban,
-			"kick":            moderation.HandleKick,
-			"timeout":         moderation.HandleTimeout,
-			"warn":            moderation.HandleWarn,
-			"warns":           moderation.HandleWarns,
+			"advent-calendar":     events.HandleAdventCalendar,
+			"fix-advent-calendar": events.HandleFixAdventCalendar,
+			"ban":                 moderation.HandleBan,
+			"unban":               moderation.HandleUnban,
+			"kick":                moderation.HandleKick,
+			"timeout":             moderation.HandleTimeout,
+			"warn":                moderation.HandleWarn,
+			"warns":               moderation.HandleWarns,
 			// Settings
 			"leveling": settings.HandleLeveling,
 		}
